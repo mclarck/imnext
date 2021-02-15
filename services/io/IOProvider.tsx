@@ -1,8 +1,8 @@
 import React from "react";
 import useIO from "./useIO"; 
 
-export const ChatIO = React.createContext<SocketIOClient.Socket | undefined>(undefined)
-export const AnalyticIO = React.createContext<SocketIOClient.Socket | undefined>(undefined)
+export const ChatIO = React.createContext<SocketIOClient.Socket>(null)
+export const AnalyticIO = React.createContext<SocketIOClient.Socket>(null)
 
 export const SocketIOProvider = (props: any) => {
     const {chatIO, analyticIO} = useIO()

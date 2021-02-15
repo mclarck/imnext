@@ -3,9 +3,8 @@ import { Manager } from "socket.io-client"
 import { Howl } from 'howler';
 
 const useIO = () => {
-
     const [chat, setChat] = useState<any>()
-    const [anal, setAnal] = useState<any>()
+    const [analytic, setAnalytic] = useState<any>()
 
     const playNotice = () => {
         const sound = new Howl({ src: ['/audio/message.mp3', '/audio/message.ogg', '/audio/message.m4r'] });
@@ -42,7 +41,7 @@ const useIO = () => {
         socket.on("join", onJoin)
         socket.on("message", onMsg)
     }
-    const handleAnal = (socket: SocketIOClient.Socket) => {
+    const handleAnalytic = (socket: SocketIOClient.Socket) => {
         // socket.emit("join", {room: "analytic@" + company})
         socket.on("message", onAnalEvent)
     }
@@ -53,7 +52,7 @@ const useIO = () => {
             socket.disconnect()
         }
     }
-    const cleanAnal = (socket: SocketIOClient.Socket) => {
+    const cleanAnalytic = (socket: SocketIOClient.Socket) => {
         if (socket) {
             socket.off("message", onAnalEvent)
             socket.disconnect()
@@ -65,16 +64,16 @@ const useIO = () => {
         const chat = manager.socket("/chat")
         const anal = manager.socket("/analytic")
         handleChat(chat)
-        handleAnal(anal)
+        handleAnalytic(anal)
         setChat(chat)
-        setAnal(anal)
+        setAnalytic(anal)
         return () => {
             cleanChat(chat)
-            cleanAnal(anal)
+            cleanAnalytic(anal)
         }
     }, [])
 
-    return { chatIO: chat, analyticIO: anal }
+    return { chatIO: chat, analyticIO: analytic }
 }
 
 export default useIO

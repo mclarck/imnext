@@ -1,9 +1,32 @@
+// @import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
+// @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap");
+
+* ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+* ::-webkit-scrollbar-thumb {
+  background-color: rgba(darkgrey, 0.5);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -11,6 +34,14 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+#__next {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; 
 }

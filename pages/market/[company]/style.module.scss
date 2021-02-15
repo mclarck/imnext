@@ -1,0 +1,17 @@
+.overView {
+  .search,
+  .slider {
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+}
+
+@media screen and (min-device-width: 768px) {
+  .overView {
+    .search,
+    .slider {
+      width: 50%;
+    }
+  }
+}

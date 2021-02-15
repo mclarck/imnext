@@ -1,0 +1,79 @@
+$light: #c3c3c3;
+$dark: #222;
+
+.tagSlider {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  input {
+    display: none;
+  }
+  .bullets {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    .bullet {
+      width: 10px;
+      height: 10px;
+      border: 1px solid $dark;
+      border-radius: 50%;
+      margin: 0;
+      padding: 0;
+      margin-right: 5px;
+      cursor: pointer;
+      &:hover {
+        background: $dark;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+  .wrapper {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+  }
+  .slides {
+    width: calc(100% * 4);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    -webkit-transition: transform 0.5s;
+    -moz-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    transition: transform 0.5s;
+    li {
+      list-style: none;
+    }
+    .slide {
+      width: calc(100% / 4);
+      position: relative;
+      float: left;
+      overflow: hidden; 
+    }
+  }
+  #radio-1:checked ~ .wrapper .slides {
+    transform: translateX(0%); 
+  }
+  #radio-2:checked ~ .wrapper .slides {
+    transform: translateX(-25%); 
+  }
+  #radio-3:checked ~ .wrapper .slides {
+    transform: translateX(-50%); 
+  }
+  #radio-4:checked ~ .wrapper .slides {
+    transform: translateX(-75%); 
+  }
+  #radio-1:checked ~ .bullets .bullet[for*="radio-1"],
+  #radio-2:checked ~ .bullets .bullet[for*="radio-2"],
+  #radio-3:checked ~ .bullets .bullet[for*="radio-3"] {
+    background: $dark;
+  }
+}

@@ -1,0 +1,23 @@
+.TagList {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 100px);
+  grid-auto-flow: dense;
+  grid-gap: 5px;
+  align-items: center;
+  overflow: auto;
+  width: 100%;
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
+  .tag {
+    list-style: none;
+    width: 100px;
+    &:first {
+      z-index: 99;
+    }
+  }
+}
