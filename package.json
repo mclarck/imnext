@@ -9,12 +9,23 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.10",
+    "@types/howler": "^2.2.1",
+    "@types/i18n-js": "^3.8.0",
+    "@types/moment": "^2.13.0",
+    "@types/react-icons": "^3.0.0",
     "@types/sass": "^1.16.0",
+    "@types/socket.io-client": "^1.4.35",
     "graphql": "^15.5.0",
+    "howler": "^2.2.1",
+    "i18n-js": "^3.8.0",
+    "moment": "^2.29.1",
     "next": "10.0.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "sass": "^1.32.7"
+    "react-hook-form": "^6.15.1",
+    "react-icons": "^4.2.0",
+    "sass": "^1.32.7",
+    "socket.io-client": "^3.1.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.28",

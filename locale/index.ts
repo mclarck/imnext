@@ -1,7 +1,20 @@
-import en_US from "./en_US.json"
-import es_AR from "./es_AR.json"
-import fr_FR from "./fr_FR.json"
-import pt_BR from "./pt_BR.json"
+import i18n from 'i18n-js'
 
-const translations = {en_US, es_AR, fr_FR, pt_BR}
-export default translations
+import en from "./en.json"
+import es from "./es.json"
+import fr from "./fr.json"
+import pt from "./pt.json"
+
+const _locale = window.localStorage.getItem("locale");
+const language = _locale ? _locale : navigator.language
+const locale = language.substr(0, 2)
+
+i18n.fallbacks = true
+i18n.missingBehaviour = 'guess'
+i18n.defaultLocale = 'en'
+i18n.locale = locale
+i18n.translations = { en, es, fr, pt }
+
+const t = i18n.t
+
+export { t, locale }
