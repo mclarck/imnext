@@ -10,7 +10,7 @@ import useCart from "./useCart";
 export default function Cart() {
   const { company, cart, bills, pay, remove } = useCart();
   return (
-    <MainLayout company={company}>
+    <MainLayout>
       <Head>
         <title>{company} | Cart - Client Name</title>
       </Head>
@@ -18,9 +18,9 @@ export default function Cart() {
         <div className={style.content}>
           <div className={style.cart}>
             <div className={style.items}>
-              {cart?.map((order, idx) => {
-                return <Order key={idx} />;
-              })}
+              {cart?.map((order, idx) => (
+                <Order key={idx} order={order} remove={remove} />
+              ))}
             </div>
           </div>
           <div className={style.billing}>

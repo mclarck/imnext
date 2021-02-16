@@ -16,3 +16,11 @@ export function sanitize(obj: any) {
     })
     return finalObj
 }
+
+export function fileUrl(file, scheme = "http") {
+    return `${scheme}://${file.uri}/${file.path}/${file.name}`
+}
+
+export function isMail(email: string) {
+    return (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
+}

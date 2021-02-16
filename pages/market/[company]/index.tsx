@@ -1,16 +1,17 @@
 import Head from "next/head";
-import React, { useContext } from "react";
+import React from "react";
 import { Article } from "../../../comp/article";
 import { MainLayout, TagLayout } from "../../../comp/layout";
 import { Search } from "../../../comp/search";
 import { TagList } from "../../../comp/taglist";
 import { TagSlider } from "../../../comp/tagslider";
+import { t } from "../../../locale";
 import { GET_STOCKS } from "../../../model/stock/queries";
-import { GraphqlCtx } from "../../../services/graphql";
+import { initializeApollo } from "../../../services/graphql/apolloClient";
 import useStocks from "./stocks/useStocks";
 import style from "./style.module.scss";
 
-export default function StockOverview() {
+export default function StockOverview({ stocks }) {
   const { company, category, addToCart } = useStocks();
   return (
     <MainLayout company={company}>
@@ -32,9 +33,14 @@ export default function StockOverview() {
               title="Cerverza"
               subtitle="Some description about cerveza"
             >
-              {/* {stocks?.map((stocks, idx) => (
-                <Article key={idx} onAddToCart={addToCart} />
-              ))} */}
+              {stocks?.map((stock, idx) => (
+                <Article
+                  key={idx}
+                  onAddToCart={(o) => addToCart({ ...o, stock: stock.node })}
+                  data={stock.node}
+                  AddToCartLabel={t("Add to Cart")}
+                />
+              ))}
             </TagLayout>
           </div>
         </section>
@@ -45,11 +51,16 @@ export default function StockOverview() {
 
 export async function getStaticPaths() {
   const paths = [{ params: { company: "kioskito" } }];
+  // fetch all my companies
   return { paths, fallback: false };
 }
 
-export async function getStaticProps() {  
+export async function getStaticProps() {
+  const apollo = initializeApollo();
+  let stocks = await apollo.query({ query: GET_STOCKS });
   return {
-    props: {},
+    props: {
+      stocks: stocks?.data?.stocks?.edges || null,
+    },
   };
 }

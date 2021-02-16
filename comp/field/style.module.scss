@@ -1,0 +1,73 @@
+@mixin clean {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  outline: none;
+}
+
+@mixin flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Field {
+  box-sizing: border-box;
+  width: 100%;
+
+  .label,
+  .error,
+  .tip {
+    font-size: 0.7rem;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      @include flex();
+      justify-content: center;
+    }
+  }
+
+  .label {
+    margin-bottom: 5px;
+    color: darken(#fff, 45);
+  }
+
+  .control {
+    @include clean();
+    border: 1px solid darken(#fff, 15);
+    max-height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 2px;
+
+    .iconRight,
+    .iconLeft {
+      width: 35px;
+      height: 30px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      color: darken(#fff, 50);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      @include clean();
+      font-size: 0.8rem;
+      font-family: inherit;
+    }
+
+    textarea {
+      padding: 9px 7px;
+    }
+
+    input {
+      padding: 9px 7px;
+    }
+  }
+}

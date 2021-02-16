@@ -6,7 +6,7 @@ import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <GraphqlProvider>
+    <GraphqlProvider pageProps={pageProps}>
       <RestProvider>
         {/* <SocketIOProvider> */}
         <Component {...pageProps} />

@@ -4,12 +4,15 @@
   border: none;
   background: none;
   outline: none;
-  text-transform: uppercase;
   font-weight: bold;
   font-size: 0.8rem;
-  padding: 10px 20px;
+  padding: 8px 20px;
   margin: 0;
   border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   &:active {
     outline: none;
   }
@@ -18,9 +21,28 @@
     color: lighten(#222, 20);
   }
   &.btn {
+    &-upp {
+      text-transform: uppercase;
+    }
+    &-right {
+      justify-content: flex-end;
+    }
+    &-link {
+      font-weight: normal;
+    }
+    &-primary {
+      color: #fff;
+      background: $primary;
+      &:hover {
+        background: lighten($primary, 2);
+      }
+    }
     &-success {
       color: #fff;
       background: $success;
+      &:hover {
+        background: lighten($primary, 2);
+      }
     }
   }
 }

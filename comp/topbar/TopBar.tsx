@@ -6,8 +6,8 @@ import Link from "next/link";
 import { BiCartAlt } from "react-icons/bi";
 import useToBar from "./useTopbar";
 
-export default function TopBar({ company }) {
-  const { cartSize, cartIsEmpty } = useToBar();
+export default function TopBar() {
+  const { cartSize, cartIsEmpty, company } = useToBar();
   return (
     <nav className={style.topBar}>
       <ul>

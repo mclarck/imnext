@@ -1,7 +1,5 @@
-import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import useCartModel from "../../../../model/cart";
-import { GET_STOCKS } from "../../../../model/stock/queries";
 
 export default function useStocks() {
     const {
@@ -11,8 +9,7 @@ export default function useStocks() {
 
 
     function addToCart(arg: any) {
-        const stock = { id: "/api/stocks/1" };
-        add({ ...arg, stock });
+        add(arg);
     }
     return { addToCart, company, category }
 }

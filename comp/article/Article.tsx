@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Modal } from "../layout";
 import Incrementor from "./Incrementor";
 import style from "./style.module.scss";
+import Image from "next/image";
+import { fileUrl } from "../../lib/ultils";
+import { t } from "../../locale";
 
 export default function Article({
   limit,
   onAddToCart,
   AddToCartLabel,
+  notice,
+  descriptions,
+  data,
 }: {
+  data: any;
+  descriptions?: any;
+  notice?: any;
   onAddToCart: Function;
   limit?: number;
   AddToCartLabel?: string;
@@ -27,13 +36,20 @@ export default function Article({
       <article className={style.article}>
         <section>
           <div className={style.thumb}>
-            <img src="https://api.inmarketify.ml/public/uploads/medias/kioskito/d570c19f-5dc8-4564-94bf-4684d3faab9a.png" />
+            <img src={fileUrl(data.file)} />
           </div>
           <aside>
             <div className={style.infos}>
-              <div className={style.title}>Specie Name</div>
+              <div className={style.title}>{data?.product?.specie}</div>
               <div className={style.description}>
-                Some description about th product
+                <div>{data?.product?.mark}</div>
+                {descriptions ? (
+                  descriptions
+                ) : (
+                  <div>
+                    {data?.product?.variety} {data?.product?.container}
+                  </div>
+                )}
               </div>
             </div>
             {isOpen && (
@@ -45,11 +61,11 @@ export default function Article({
         </section>
         <section className={style.pricing}>
           <div className={style.price}>
-            <span className={style.currency}>$</span>
-            <span className={style.amount}>450</span>
-            <span className={style.strike}>500</span>
+            <span className={style.currency}>{data?.currency || "$"}</span>
+            <span className={style.amount}>{data?.price || "-"}</span>
+            <span className={style.strike}>{data.oldPrice || ""}</span>
           </div>
-          <aside>Envio Gratis</aside>
+          {notice && <aside>{notice}</aside>}
           {isOpen && (
             <div className={style.actions}>
               <button
@@ -57,7 +73,7 @@ export default function Article({
                 className="btn btn-primary"
                 onClick={submit}
               >
-                {AddToCartLabel || "Add To Cart"}
+                {AddToCartLabel || t("Add To Cart")}
               </button>
             </div>
           )}

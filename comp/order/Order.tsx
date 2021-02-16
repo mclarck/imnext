@@ -1,25 +1,30 @@
 import React from "react";
 import { MdClose } from "react-icons/md";
+import { fileUrl } from "../../lib/ultils";
 import style from "./style.module.scss";
 
-export default function Order() {
+export default function Order({ order, remove }) {
+  const stock = order?.stock || {};
   return (
     <div className={style.Order}>
       <div className={style.thumb}>
-        <img src="https://api.inmarketify.ml/public/uploads/medias/kioskito/d570c19f-5dc8-4564-94bf-4684d3faab9a.png" />
+        <img src={fileUrl(stock.file)} />
       </div>
       <div className={style.infos}>
-        <div className={style.title}>Specie Name</div>
+        <div className={style.title}>{stock.product?.specie}</div>
         <div className={style.description}>
-          Some description about th product
+          <div>{stock?.product?.mark}</div>
+          <div>
+            {stock?.product?.variety} {stock?.product?.container}
+          </div>
         </div>
       </div>
       <div className={style.quantity}>
         <span>x</span>
-        <span className={style.amount}>5</span>
+        <span className={style.amount}>{order?.quantity}</span>
       </div>
       <div className={style.actions}>
-        <button type="button" className={style.close}>
+        <button type="button" className={style.close} onClick={()=>remove(order)}>
           <MdClose />
         </button>
       </div>
