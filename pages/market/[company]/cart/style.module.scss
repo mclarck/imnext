@@ -1,0 +1,38 @@
+.Cart {
+  .content {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .cart,
+  .billing {
+    padding: 20px;
+  }
+
+  .cart {
+    padding: 20px;
+  }
+
+  .billing {
+    margin-bottom: 20px;
+  }
+
+  .payment,
+  .bill {
+    margin-bottom: 20px;
+  }
+  .payment {
+    text-align: center;
+  }
+}
+
+@media screen and (min-device-width: 768px) {
+  .Cart {
+    .content {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr 250px);
+      width: 60vw;
+      overflow: hidden;
+    }
+  }
+}

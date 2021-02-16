@@ -1,12 +1,17 @@
 import Head from "next/head";
-import React from "react";
-import { MainLayout } from "../../../comp/layout";
+import React, { useContext } from "react";
+import { Article } from "../../../comp/article";
+import { MainLayout, TagLayout } from "../../../comp/layout";
 import { Search } from "../../../comp/search";
 import { TagList } from "../../../comp/taglist";
 import { TagSlider } from "../../../comp/tagslider";
+import { GET_STOCKS } from "../../../model/stock/queries";
+import { GraphqlCtx } from "../../../services/graphql";
+import useStocks from "./stocks/useStocks";
 import style from "./style.module.scss";
 
-export default function StockOverview({ company }) {
+export default function StockOverview() {
+  const { company, category, addToCart } = useStocks();
   return (
     <MainLayout company={company}>
       <Head>
@@ -21,25 +26,30 @@ export default function StockOverview({ company }) {
             slides={[() => <TagList />, () => <TagList />, () => <TagList />]}
           />
         </div>
+        <section className={style.articles}>
+          <div className={style.article}>
+            <TagLayout
+              title="Cerverza"
+              subtitle="Some description about cerveza"
+            >
+              {/* {stocks?.map((stocks, idx) => (
+                <Article key={idx} onAddToCart={addToCart} />
+              ))} */}
+            </TagLayout>
+          </div>
+        </section>
       </div>
     </MainLayout>
   );
 }
 
 export async function getStaticPaths() {
-  const paths = [];
-  paths.push({ params: { company: "kioskito" } });
-  paths.push({ params: { company: "test" } });
-  return {
-    paths,
-    fallback: false,
-  };
+  const paths = [{ params: { company: "kioskito" } }];
+  return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps() {  
   return {
-    props: {
-      company: params.company,
-    },
+    props: {},
   };
 }

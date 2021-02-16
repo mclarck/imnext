@@ -1,9 +1,21 @@
 .overView {
+  display: grid;
+  grid-template-rows: repeat(1, auto auto 1fr);
+  height: 100%;
+  overflow: hidden;
+
   .search,
   .slider {
-    width: 70%;
+    width: 70vw;
     margin: 0 auto;
     padding: 10px 0;
+  }
+  .articles {
+    padding: 0 30px;
+    overflow: auto;
+  }
+  .article {
+    margin-bottom: 20px;
   }
 }
 
@@ -11,7 +23,10 @@
   .overView {
     .search,
     .slider {
-      width: 50%;
+      width: 50vw;
+    }
+    .articles {
+      padding: 0 100px;
     }
   }
 }

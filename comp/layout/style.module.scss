@@ -3,4 +3,98 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-rows: repeat(1, auto 1fr);
+  #content {
+    overflow: hidden;
+  }
+}
+
+.tagLayout {
+  > .header {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr auto);
+    align-items: center;
+    font-size: 0.7rem;
+    .title {
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+    .actions {
+      ul {
+        margin: 0;
+        padding: 0;
+        li {
+          list-style: none;
+          a {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          .icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+  > .body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+    grid-auto-flow: column;
+    grid-gap: 10px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+    &.wrap {
+      justify-content: center;
+      grid-auto-flow: row; 
+    }
+  }
+}
+
+.Modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(#222, 0.5);
+
+  > .wrapper {
+    background-color: #fff;
+    width: auto;
+    > .header {
+      .close {
+        border: none;
+        background: none;
+        outline: none;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        display: grid;
+        place-content: center;
+        float: right;
+        &:active {
+          outline: none;
+        }
+        &:hover {
+          color: lighten(#222, 30);
+        }
+      }
+    }
+  }
 }

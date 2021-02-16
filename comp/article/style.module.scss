@@ -1,0 +1,141 @@
+.wrapper,
+.modalWrapper {
+  border: none;
+  background: none;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: none;
+  padding: 10px;
+  font-size: 0.7rem;
+  &:active {
+    outline: none;
+  }
+  &:hover {
+    cursor: pointer;
+    .infos,
+    .pricing {
+      color: lighten(#222, 20);
+    }
+  }
+  .thumb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 100px;
+    margin: 0 auto;
+    img {
+      width: 100%;
+    }
+  }
+  .infos {
+    .title {
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+  }
+  .pricing {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    font-size: 0.7rem;
+    gap: 5px;
+    .amount {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .strike {
+      text-decoration: line-through;
+      margin-left: 5px;
+    }
+    .price {
+      min-width: 50px;
+    }
+    > aside {
+      flex: 1;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  }
+}
+.modalWrapper {
+  width: 90vw;
+  max-height: 50vh;
+  overflow: auto;
+  text-align: center;
+  &:hover {
+    cursor: auto;
+    .infos,
+    .pricing {
+      color: lighten(#222, 0);
+    }
+  }
+  .features {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  > article > section:first-of-type {
+    display: grid;
+    grid-template-columns: repeat(1, auto 1fr);
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    > aside {
+      padding: 10px;
+    }
+  }
+}
+.Incrementor {
+  display: grid;
+  grid-template-columns: repeat(1, auto 50px auto);
+  align-items: center;
+  justify-content: center;
+  max-width: 150px;
+  .right,
+  .left {
+    border: none;
+    background: lighten(#222, 30);
+    border-radius: 50%;
+    color: #fff;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+
+    &:active {
+      outline: none;
+    }
+    &:hover {
+      cursor: pointer;
+      color: lighten(#222, 20);
+    }
+  }
+  .input > input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    text-align: center;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+@media screen and (min-device-width: 768px) {
+  .modalWrapper {
+    width: 40vw;
+  }
+}

@@ -6,7 +6,7 @@ export default function MainLayout({ children, company }) {
   return (
     <div className={style.mainLayout}>
       <TopBar company={company} />
-      <div id="__content">{children}</div>
+      <div id={style.content}>{children}</div>
     </div>
   );
 }

@@ -1,0 +1,51 @@
+.Order {
+  display: grid;
+  grid-template-columns: repeat(1, auto 1fr auto auto);
+  align-items: center;
+  .thumb {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    img {
+      width: 100%;
+    }
+  }
+  .infos {
+    font-size: 0.8rem;
+    padding: 20px;
+    .title {
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+  }
+  .quantity {
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 20px;
+  }
+  .actions {
+    .close {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      border: none;
+      background: none;
+      outline: none;
+      margin: 0;
+      padding: none;
+      &:active {
+        outline: none;
+      }
+      &:hover {
+        cursor: pointer;
+        color: lighten(#222, 30);
+      }
+    }
+  }
+}

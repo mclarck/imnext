@@ -1,13 +1,13 @@
 import { currentLocale } from "i18n-js";
 import React, { useState } from "react";
 import style from "./style.module.scss";
+import { useRouter } from "next/router";
 
-export default function TagSlider({ slides }: { slides: Array<Function> }) {
+export default function TagSlider({ slides }: { slides: Array<Function> }) { 
   const [selected, select] = useState<string>("radio-1");
   function handle(e: any) {
     select((current) => (current = e.target.value));
-  }
-  console.log(selected);
+  } 
   return (
     <div className={style.tagSlider}>
       {slides.map((slide, idx) => {

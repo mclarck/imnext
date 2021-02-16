@@ -1,0 +1,18 @@
+.orderState {
+  box-sizing: border-box;
+  font-size: 0.7rem;
+  color: darken(#fff, 30);
+
+  .active {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: darken(#fff, 50);
+  }
+
+  ul {
+    li {
+      margin: 5px 0;
+      text-transform: capitalize;
+    }
+  }
+}

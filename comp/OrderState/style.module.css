@@ -1,0 +1,18 @@
+.orderState {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 0.7rem;
+  color: #b3b3b3;
+}
+
+.orderState .active {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: gray;
+}
+
+.orderState ul li {
+  margin: 5px 0;
+  text-transform: capitalize;
+}
+/*# sourceMappingURL=style.module.css.map */

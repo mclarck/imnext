@@ -1,3 +1,5 @@
 import MainLayout from "./MainLayout";
+import Modal from "./Modal";
+import TagLayout from "./TagLayout";
 
-export { MainLayout }
+export { MainLayout, TagLayout, Modal }

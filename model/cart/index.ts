@@ -1,5 +1,5 @@
-import {gql} from '@apollo/client'
-import {_auth} from '../cache'
+import { gql } from '@apollo/client'
+import { _cart } from '../cache'
 
 export const GET_CART_ITEMS = gql`
     query GetCartItems {
@@ -7,22 +7,22 @@ export const GET_CART_ITEMS = gql`
     }
 `
 const useCartModel = () => {
-    const read = () => _auth()
+    const read = () => _cart()
     const add = (order: any) => {
         if (order?.quantity > 0) {
-            const prev =  _auth()
+            const prev = _cart() || [] 
             const items = [...prev, order]
-            _auth(items)
+            _cart(items)
         }
     }
     const remove = (order: any) => {
-        const items = _auth().filter((o: any) => o !== order)
-        _auth(items)
+        const items = _cart().filter((o: any) => o !== order)
+        _cart(items)
     }
     const clear = () => {
-        _auth([])
+        _cart([])
     }
-    return {add, remove, clear, read}
+    return { add, remove, clear, read }
 }
 
 export default useCartModel
