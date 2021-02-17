@@ -30,7 +30,7 @@ export default function TagLayout({
         <nav className={style.actions}>
           <ul>
             <li>
-              <a href={`/market/${company}/stocks/${title}`}>
+              <a href={`/${company}/stocks/${title}`}>
                 <span className={style.name}>more</span>
                 <span className={style.icon}>
                   <HiChevronRight />

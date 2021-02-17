@@ -12,21 +12,21 @@ export default function TopBar() {
     <nav className={style.topBar}>
       <ul>
         <li>
-          <Link href={`/market/${company}`}>
+          <Link href={`/${company}`}>
             <a className={style.brand}>{company}</a>
           </Link>
         </li>
       </ul>
       <ul>
         <li>
-          <Link href={`/market/${company}`}>
+          <Link href={`/${company}`}>
             <a className={style.link}>
               <FiSearch />
             </a>
           </Link>
         </li>
         <li>
-          <Link href={`/market/${company}/cart`}>
+          <Link href={`/${company}/cart`}>
             <a className={style.link}>
               <BiCartAlt />
               {!cartIsEmpty && <span className={style.badge}>{cartSize}</span>}

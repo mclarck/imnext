@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
-import useCartModel from "../../../../model/cart";
+import { useRouter } from "next/router"; 
+import useCartModel from "../../../model/cart";
 
 export default function useStocks() {
     const {

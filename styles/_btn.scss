@@ -21,6 +21,10 @@
     color: lighten(#222, 20);
   }
   &.btn {
+    &-social-login {
+      color: #222;
+      background: darken($light, 2);
+    }
     &-upp {
       text-transform: uppercase;
     }

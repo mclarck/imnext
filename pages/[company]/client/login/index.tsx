@@ -2,14 +2,15 @@ import Head from "next/head";
 import useClient from "../useClient";
 import style from "./style.module.scss";
 import React from "react";
-import Loader from "../../../../../comp/loader";
-import { MdPerson, MdPhone } from "react-icons/md";
+import Loader from "../../../../comp/loader";
+import { MdPerson } from "react-icons/md";
 import { BsShieldLock } from "react-icons/bs";
 import Link from "next/link";
-import Field from "../../../../../comp/field";
+import Field from "../../../../comp/field";
 import ReCAPTCHA from "react-google-recaptcha";
+import { csrfToken, providers, signIn } from "next-auth/client";
 
-export default function Login(props) {
+export default function Login({ csrfToken, recaptchaKey, providers }) {
   const {
     t,
     company,
@@ -20,7 +21,6 @@ export default function Login(props) {
     register,
     recaptcha,
   } = useClient();
-
   return (
     <div className={style.Login}>
       <Head>
@@ -28,6 +28,27 @@ export default function Login(props) {
       </Head>
       <div className={style.login}>
         <form className={style.form} onSubmit={handleSubmit(login)}>
+          <input
+            name="csrfToken"
+            type="hidden"
+            ref={register}
+            defaultValue={csrfToken}
+          />
+          {Object.values(providers).map((provider: any) => {
+            if ([""].includes(provider.name)) {
+              return (
+                <div key={provider.name} className={style.field}>
+                  <button
+                    type="button"
+                    className="btn btn-social-login"
+                    onClick={() => signIn(provider.id)}
+                  >
+                    Sign in with {provider.name}
+                  </button>
+                </div>
+              );
+            }
+          })}
           <div className={style.field}>
             <Field
               label={t("Username or Email")}
@@ -47,7 +68,7 @@ export default function Login(props) {
             </Field>
           </div>
           <div className={style.field}>
-            <Link href={`/market/${company}/client/help`}>
+            <Link href={`/${company}/client/help`}>
               <a className="btn btn-link btn-right">{t("Forget your PIN ?")}</a>
             </Link>
           </div>
@@ -57,7 +78,10 @@ export default function Login(props) {
             </button>
           </div>
           <div className={style.submit}>
-            <Link href={`/market/${company}/client/register`}>
+            <Link
+              href={`/[company]/client/register`}
+              as={`/${company}/client/register`}
+            >
               <a className="btn">{t("Register")}</a>
             </Link>
           </div>
@@ -65,7 +89,7 @@ export default function Login(props) {
             ref={recaptcha}
             badge="bottomright"
             size="invisible"
-            sitekey={props.recaptchaKey}
+            sitekey={recaptchaKey}
           />
         </form>
       </div>
@@ -74,15 +98,15 @@ export default function Login(props) {
   );
 }
 
-export async function getStaticPaths() {
-  const paths = [{ params: { company: "kioskito" } }];
-  // fetch all my companies
-  return { paths, fallback: false };
-}
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   return {
     props: {
+      providers: await providers(),
+      csrfToken: await csrfToken(context),
       recaptchaKey: process.env.RECAPTCHA_PUBLIC_KEY,
+      rest: {
+        uri: process.env.API_REST_URL,
+      },
     },
   };
 }

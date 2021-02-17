@@ -18,12 +18,12 @@ export default function PopMenu() {
             {!session && (
               <React.Fragment>
                 <li className={style.item}>
-                  <Link href={`/market/${company}/client/login`}>
+                  <Link href={`/${company}/client/login`}>
                     <a className={style.link}>{t("Login")}</a>
                   </Link>
                 </li>
                 <li className={style.item}>
-                  <Link href={`/market/${company}/client/register`}>
+                  <Link href={`/${company}/client/register`}>
                     <a className={style.link}>{t("Register")}</a>
                   </Link>
                 </li>
@@ -32,24 +32,29 @@ export default function PopMenu() {
             {session && (
               <React.Fragment>
                 <li className={style.item}>
-                  <Link href={`/market/${company}/client/profile`}>
+                  <Link href={`/${company}/client/profile`}>
                     <a className={style.link}>{t("Profile")}</a>
                   </Link>
                 </li>
                 <li className={style.item}>
-                  <Link href={`/market/${company}/client/chat`}>
+                  <Link href={`/${company}/client/chat`}>
                     <a className={style.link}>{t("Chat")}</a>
                   </Link>
                 </li>
                 <li className={style.item}>
-                  <Link href={`/market/${company}/client/orders`}>
+                  <Link href={`/${company}/client/orders`}>
                     <a className={style.link}>{t("My Orders")}</a>
+                  </Link>
+                </li>
+                <li className={style.item}>
+                  <Link href={`/api/auth/signout`}>
+                    <a className={style.link}>{t("Logout")}</a>
                   </Link>
                 </li>
               </React.Fragment>
             )}
             <li className={style.item}>
-              <Link href={`/market/${company}/client/help`}>
+              <Link href={`/${company}/client/help`}>
                 <a className={style.link}>{t("Help")}</a>
               </Link>
             </li>

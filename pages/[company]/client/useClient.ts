@@ -1,9 +1,10 @@
 import { useRouter } from "next/router"
 import { useContext, useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
-import { isMail } from "../../../../lib/ultils"
-import { t } from "../../../../locale"
-import { RestCtx } from "../../../../services/rest"
+import { isMail } from "../../../lib/ultils"
+import { t } from "../../../locale"
+import { RestCtx } from "../../../services/rest"
+import { signIn } from "next-auth/client";
 
 export default function useClient() {
     const { register, handleSubmit } = useForm()
@@ -18,26 +19,28 @@ export default function useClient() {
     const [offerAccepted, handleOffer] = useState<boolean>(false)
     const recaptcha = useRef(null);
     const { query: { company } } = useRouter();
- 
 
-    async function login(data:any){
+
+    async function login(data: any) {
         try {
-            const recaptchaToken = await recaptcha.current?.executeAsync()
-            data.recaptcha = recaptchaToken
-            console.log(data)
+            // const recaptchaToken = await recaptcha.current?.executeAsync()
+            // data.recaptcha = recaptchaToken
+            const token = { ...prepare(data), company, callbackUrl: `/${company}`, callbackFailure: `/${company}/client/error/login` }
+            signIn("client-login", token)
         } catch (error) {
-            console.log(error.message)
+            alert(JSON.stringify(error))
+            console.log(error)
         }
     }
 
-    async function registration(data:any){
+    async function registration(data: any) {
         try {
             const recaptchaToken = await recaptcha.current?.executeAsync()
             data.recaptcha = recaptchaToken
             data.acceptOffer = offerAccepted
             console.log(data)
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
         }
     }
 

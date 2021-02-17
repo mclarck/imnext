@@ -1,3 +1,3 @@
-import RestProvider, { RestCtx } from "./RestProvider";
+import RestProvider, { initializeRest, RestCtx } from "./RestProvider";
 
-export { RestProvider, RestCtx }
+export { RestProvider, RestCtx, initializeRest }

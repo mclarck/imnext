@@ -10,22 +10,22 @@ export default function TagList() {
   return (
     <ul className={style.TagList}>
       <li className={style.tag}>
-        <Tag name="Cerveza" path={`/market/${company}`} />
+        <Tag name="Cerveza" path={`/${company}`} />
       </li>
       <li className={style.tag}>
-        <Tag name="Ron" path={`/market/${company}`} />
+        <Tag name="Ron" path={`/${company}`} />
       </li>
       <li className={style.tag}>
-        <Tag name="Comida" path={`/market/${company}`} />
+        <Tag name="Comida" path={`/${company}`} />
       </li>
       <li className={style.tag}>
-        <Tag name="No Se que" path={`/market/${company}`} />
+        <Tag name="No Se que" path={`/${company}`} />
       </li>
       <li className={style.tag}>
-        <Tag name="Otra Cosa" path={`/market/${company}`} />
+        <Tag name="Otra Cosa" path={`/${company}`} />
       </li>
       <li className={style.tag}>
-        <Tag name="Bebidas" path={`/market/${company}`} />
+        <Tag name="Bebidas" path={`/${company}`} />
       </li>
     </ul>
   );

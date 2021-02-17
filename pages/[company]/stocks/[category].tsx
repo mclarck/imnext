@@ -1,17 +1,18 @@
+import { t } from "i18n-js";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 import { Article } from "../../../comp/article";
 import { MainLayout, TagLayout } from "../../../comp/layout";
 import { Search } from "../../../comp/search";
 import { TagList } from "../../../comp/taglist";
 import { TagSlider } from "../../../comp/tagslider";
-import { t } from "../../../locale";
 import { GET_STOCKS } from "../../../model/stock/queries";
 import { initializeApollo } from "../../../services/graphql/apolloClient";
-import useStocks from "./stocks/useStocks";
-import style from "./style.module.scss";
+import style from "../style.module.scss";
+import useStocks from "./useStocks";
 
-export default function StockOverview({ stocks }) {
+export default function StockCategory({ stocks }) {
   const { company, category, addToCart } = useStocks();
   return (
     <MainLayout>
@@ -30,8 +31,9 @@ export default function StockOverview({ stocks }) {
         <section className={style.articles}>
           <div className={style.article}>
             <TagLayout
-              title="Cerverza"
+              title={category}
               subtitle="Some description about cerveza"
+              wrap={true}
             >
               {stocks?.map((stock, idx) => (
                 <Article
@@ -50,14 +52,19 @@ export default function StockOverview({ stocks }) {
 }
 
 export async function getStaticPaths() {
-  const paths = [{ params: { company: "kioskito" } }];
+  const paths = [{ params: { company: "kioskito", category: "Cerveza" } }];
   // fetch all my companies
   return { paths, fallback: false };
 }
 
 export async function getStaticProps() {
   const apollo = initializeApollo();
-  let stocks = await apollo.query({ query: GET_STOCKS });
+  let stocks: any = {};
+  try {
+    stocks = await apollo.query({ query: GET_STOCKS });
+  } catch (error) {
+    console.log(error.message);
+  }
   return {
     props: {
       stocks: stocks?.data?.stocks?.edges || null,

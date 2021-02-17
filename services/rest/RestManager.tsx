@@ -1,12 +1,12 @@
 export default class RestManager {
-  private readonly base: any;
-  private readonly headers: any;
-  constructor(arg: { uri: string; headers?: any }) {
-    this.base = arg.uri;
+  private base: any;
+  private headers: any;
+  constructor(arg: { uri: string; headers?: any }) { 
+    this.base = arg?.uri;
     this.headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
-      ...arg.headers,
+      ...arg?.headers,
     };
   }
 
@@ -41,11 +41,11 @@ export default class RestManager {
     data?: any
   ) {
     try {
-      const url = this.getUrl(path);
+      const url = this.getUrl(path); 
       return await fetch(url, {
         headers: this.headers,
         method: verb,
-        body: data && JSON.stringify(data),
+        body: JSON.stringify(data || {}),
       });
     } catch (error) {
       return this.handleError(error);

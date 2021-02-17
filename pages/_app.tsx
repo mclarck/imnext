@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
   const { session } = pageProps;
   return (
     <GraphqlProvider pageProps={pageProps}>
-      <RestProvider>
+      <RestProvider pageProps={pageProps}>
         {/* <SocketIOProvider> */}
         <Provider session={session}>
           <Component {...pageProps} />
