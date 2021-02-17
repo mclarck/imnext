@@ -2,24 +2,27 @@ import Head from "next/head";
 import useClient from "./useClient";
 import style from "./style.module.scss";
 import React from "react";
-import Loader from "../../comp/loader";
+import Loader from "../../../../comp/loader";
 import { MdLocationOn, MdMail, MdPerson, MdPhone } from "react-icons/md";
 import Link from "next/link";
-import Field from "../../comp/field";
-import Check from "../../comp/check";
+import Field from "../../../../comp/field";
+import Check from "../../../../comp/check";
 import ReCAPTCHA from "react-google-recaptcha";
 import { BsShieldLock } from "react-icons/bs";
 
 export default function Register(props) {
   const {
     t,
+    company,
     error,
     resetAddress,
     loading,
     handleSubmit,
-    submit,
+    registration,
     register,
     recaptcha,
+    handleTos,
+    handleOffer
   } = useClient();
 
   return (
@@ -28,7 +31,7 @@ export default function Register(props) {
         <title>Client - Registration</title>
       </Head>
       <div className={style.register}>
-        <form className={style.form} onSubmit={handleSubmit(submit)}>
+        <form className={style.form} onSubmit={handleSubmit(registration)}>
           <div className={style.field}>
             <Field
               label={t("Username")}
@@ -63,10 +66,10 @@ export default function Register(props) {
           </div>
           <div className={`${style.field} ${style["grid-2"]}`}>
             <Field label={t("PIN")} iconRight={<BsShieldLock />}>
-              <input type="text" name="pin" ref={register} />
+              <input type="password" name="pin" ref={register} />
             </Field>
             <Field label={t("Confirm PIN")} iconRight={<BsShieldLock />}>
-              <input type="text" name="vpin" ref={register} />
+              <input type="password" name="vpin" ref={register} />
             </Field>
           </div>
           <div className={style.field}>
@@ -117,11 +120,11 @@ export default function Register(props) {
             <div>
               <Check
                 title="Yes, I accept Terms of Services"
-                onAccept={() => {}}
+                onAccept={handleTos}
               />
               <Check
                 title="Yes, I want to receive specials offers"
-                onAccept={() => {}}
+                onAccept={handleOffer}
               />
             </div>
             <div>
@@ -132,7 +135,7 @@ export default function Register(props) {
           </div>
           <br />
           <div className={style.submit}>
-            <Link href="/client/login">
+            <Link href={`/market/${company}/client/login`}>
               <a className="btn">
                 {t("Already have an account?")}, {t("Login")}
               </a>
@@ -151,6 +154,11 @@ export default function Register(props) {
   );
 }
 
+export async function getStaticPaths() {
+  const paths = [{ params: { company: "kioskito" } }];
+  // fetch all my companies
+  return { paths, fallback: false };
+}
 export async function getStaticProps() {
   return {
     props: {

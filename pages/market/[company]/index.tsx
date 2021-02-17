@@ -14,7 +14,7 @@ import style from "./style.module.scss";
 export default function StockOverview({ stocks }) {
   const { company, category, addToCart } = useStocks();
   return (
-    <MainLayout company={company}>
+    <MainLayout>
       <Head>
         <title>{company} Stock Overview</title>
       </Head>

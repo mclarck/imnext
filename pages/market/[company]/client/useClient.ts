@@ -1,8 +1,9 @@
+import { useRouter } from "next/router"
 import { useContext, useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
-import { isMail } from "../../lib/ultils"
-import { t } from "../../locale"
-import { RestCtx } from "../../services/rest"
+import { isMail } from "../../../../lib/ultils"
+import { t } from "../../../../locale"
+import { RestCtx } from "../../../../services/rest"
 
 export default function useClient() {
     const { register, handleSubmit } = useForm()
@@ -13,14 +14,28 @@ export default function useClient() {
     const [data, setData] = useState<any>({})
     const [confirmed, setConfirm] = useState<boolean>(false)
     const [registered, setRegistered] = useState<boolean>(false)
-    const [tosAcceted, handleTos] = useState<boolean>()
-    const [offerAccepted, handleOffer] = useState<boolean>()
-    const recaptcha = useRef(null)
+    const [tosAcceted, handleTos] = useState<boolean>(false)
+    const [offerAccepted, handleOffer] = useState<boolean>(false)
+    const recaptcha = useRef(null);
+    const { query: { company } } = useRouter();
+ 
 
-    const submit = async (data: any) => {
+    async function login(data:any){
         try {
-            const recaptchaToken = await recaptcha.current?.asyncExecute()
-            console.log(recaptchaToken)
+            const recaptchaToken = await recaptcha.current?.executeAsync()
+            data.recaptcha = recaptchaToken
+            console.log(data)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    async function registration(data:any){
+        try {
+            const recaptchaToken = await recaptcha.current?.executeAsync()
+            data.recaptcha = recaptchaToken
+            data.acceptOffer = offerAccepted
+            console.log(data)
         } catch (error) {
             console.log(error.message)
         }
@@ -58,5 +73,5 @@ export default function useClient() {
         setConfirm(false)
     }
 
-    return { t, recaptcha, resetAddress, error, loading, submit, register, handleSubmit, handleTos, handleOffer }
+    return { t, login, registration, company, recaptcha, resetAddress, error, loading, register, handleSubmit, handleTos, handleOffer }
 }

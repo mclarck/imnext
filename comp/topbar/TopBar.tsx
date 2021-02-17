@@ -34,7 +34,7 @@ export default function TopBar() {
           </Link>
         </li>
         <li>
-          <PopMenu company={company} />
+          <PopMenu />
         </li>
       </ul>
     </nav>

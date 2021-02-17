@@ -1,21 +1,22 @@
 import Head from "next/head";
-import useClient from "./useClient";
+import useClient from "../useClient";
 import style from "./style.module.scss";
 import React from "react";
-import Loader from "../../comp/loader";
+import Loader from "../../../../../comp/loader";
 import { MdPerson, MdPhone } from "react-icons/md";
 import { BsShieldLock } from "react-icons/bs";
 import Link from "next/link";
-import Field from "../../comp/field";
+import Field from "../../../../../comp/field";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Login(props) {
   const {
     t,
-    error, 
+    company,
+    error,
     loading,
     handleSubmit,
-    submit,
+    login,
     register,
     recaptcha,
   } = useClient();
@@ -26,7 +27,7 @@ export default function Login(props) {
         <title>Client - Login</title>
       </Head>
       <div className={style.login}>
-        <form className={style.form} onSubmit={handleSubmit(submit)}>
+        <form className={style.form} onSubmit={handleSubmit(login)}>
           <div className={style.field}>
             <Field
               label={t("Username or Email")}
@@ -46,7 +47,7 @@ export default function Login(props) {
             </Field>
           </div>
           <div className={style.field}>
-            <Link href="/client/help">
+            <Link href={`/market/${company}/client/help`}>
               <a className="btn btn-link btn-right">{t("Forget your PIN ?")}</a>
             </Link>
           </div>
@@ -56,7 +57,7 @@ export default function Login(props) {
             </button>
           </div>
           <div className={style.submit}>
-            <Link href="/client/register">
+            <Link href={`/market/${company}/client/register`}>
               <a className="btn">{t("Register")}</a>
             </Link>
           </div>
@@ -73,6 +74,11 @@ export default function Login(props) {
   );
 }
 
+export async function getStaticPaths() {
+  const paths = [{ params: { company: "kioskito" } }];
+  // fetch all my companies
+  return { paths, fallback: false };
+}
 export async function getStaticProps() {
   return {
     props: {
