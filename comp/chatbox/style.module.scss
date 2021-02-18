@@ -1,0 +1,144 @@
+.chatbox {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: repeat(1, auto 1fr auto);
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  * {
+    box-sizing: border-box;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(darkgrey, 0.5);
+    }
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(1, 50px 1fr 50px);
+    align-items: center;
+    border-bottom: 1px solid darken(#fff, 10);
+
+    .icon {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+    }
+
+    .title {
+      box-sizing: border-box;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .action {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+          color: lighten(#222, 30);
+        }
+
+        &:active {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .body {
+    box-sizing: border-box;
+    padding: 10px;
+    background: darken(#fff, 2);
+    overflow: auto;
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: repeat(1, auto 1fr auto);
+    align-items: center;
+    overflow: hidden;
+    border-top: 1px solid darken(#fff, 10);
+
+    .control {
+      border: none;
+      overflow: hidden;
+    }
+
+    textarea,
+    input {
+      padding: 7px 7px;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      height: 50px;
+      // border: 1px solid darken(#fff, 10) !important;
+      border: none;
+      border-radius: 3px;
+      font-family: inherit;
+    }
+
+    textarea,
+    input,
+    button {
+      border: none;
+      background: none;
+      outline: none;
+      box-shadow: none;
+
+      &:active,
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+
+      .action {
+        margin: 0;
+        padding: 0;
+        width: 50px;
+        height: 50px;
+        color: #222;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 20px;
+
+        &:hover {
+          color: lighten(#222, 30);
+        }
+      }
+    }
+  }
+}

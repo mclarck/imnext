@@ -1,0 +1,22 @@
+.avatar {
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    outline: none;
+  }
+
+  img {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+}
