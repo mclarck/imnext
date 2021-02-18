@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { BiCheck, BiCheckDouble } from 'react-icons/all'
+import { BiCheck, BiCheckDouble } from 'react-icons/bi'
 import Avatar from '../avatar/Avatar'
 import style from './style.module.scss'
 export type BubbleType = {

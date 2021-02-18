@@ -2,6 +2,7 @@ import { getSession } from "next-auth/client";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
+import ChatBox from "../../../../comp/chatbox/ChatBox";
 import { MainLayout } from "../../../../comp/layout";
 import { t } from "../../../../locale";
 import style from "./style.module.scss";
@@ -37,10 +38,7 @@ export default function Chat({ company, session }) {
           </nav>
         </div>
         <div className={style.body}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-          exercitationem mollitia temporibus qui similique eligendi blanditiis,
-          maiores delectus repellat nesciunt corporis esse at velit, itaque vero
-          debitis, inventore cum iure.
+          <ChatBox title={`${company}@${t("support")}`} />
         </div>
       </div>
     </MainLayout>
