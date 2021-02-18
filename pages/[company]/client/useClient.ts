@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form"
 import { isMail } from "../../../lib/ultils"
 import { t } from "../../../locale"
 import { RestCtx } from "../../../services/rest"
-import { signIn } from "next-auth/client";
+import { signIn, useSession } from "next-auth/client";
 
 export default function useClient() {
+    const [session] = useSession()
     const { register, handleSubmit } = useForm()
     const rest = useContext(RestCtx)
     const [loading, setLoading] = useState(false)
@@ -18,7 +19,7 @@ export default function useClient() {
     const [tosAcceted, handleTos] = useState<boolean>(false)
     const [offerAccepted, handleOffer] = useState<boolean>(false)
     const recaptcha = useRef(null);
-    const { query: { company } } = useRouter();
+    const { query: { company }, replace } = useRouter();
 
 
     async function login(data: any) {
@@ -76,5 +77,5 @@ export default function useClient() {
         setConfirm(false)
     }
 
-    return { t, login, registration, company, recaptcha, resetAddress, error, loading, register, handleSubmit, handleTos, handleOffer }
+    return { t, replace, session, login, registration, company, recaptcha, resetAddress, error, loading, register, handleSubmit, handleTos, handleOffer }
 }

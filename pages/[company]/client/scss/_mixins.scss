@@ -1,0 +1,114 @@
+$primary: #00b894;
+$success: #00b894;
+$danger: #d63031;
+$warning: #fdcb6e;
+$light: #fafafa;
+$dark: #222;
+
+@mixin flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+@mixin profile {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: repeat(1, auto 1fr);
+  overflow: hidden;
+
+  .heading {
+    box-sizing: border-box;
+  }
+
+  .tabs {
+    background: $primary;
+  }
+
+  .tabs > ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    li,
+    a {
+      list-style: none;
+      text-decoration: none;
+      outline: none;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      height: 50px;
+      @include flex;
+      justify-content: center;
+
+      &:active {
+        outline: none;
+      }
+    }
+
+    a {
+      border-bottom: 1px solid darken($light, 2);
+      text-transform: uppercase;
+      font-size: 14px;
+      color: lighten($primary, 20);
+      font-weight: bold;
+      border-bottom: 2px solid transparent;
+      border-top: 2px solid transparent;
+
+      &.active {
+        border-bottom: 2px solid darken($light, 2);
+        color: $light;
+      }
+    }
+  }
+
+  .body {
+    overflow: auto;
+  }
+}
+
+@mixin profile-wide-screen {
+  grid-template-columns: repeat(1, 150px 30vw);
+  align-items: stretch;
+  width: 60vw;
+  margin: 0 auto;
+
+  .heading {
+    .tabs {
+      display: block;
+      background: none;
+      min-width: 100px;
+      padding: 30px 0;
+
+      > ul {
+        display: block;
+
+        li,
+        a {
+          height: 30px;
+        }
+
+        a {
+          border: none;
+          text-transform: none;
+          color: $dark;
+          font-weight: normal;
+          font-size: 12px;
+          justify-content: flex-start;
+          padding: 0 10px;
+
+          &.active {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  .body {
+    height: calc(100vh - 50px);
+  }
+}

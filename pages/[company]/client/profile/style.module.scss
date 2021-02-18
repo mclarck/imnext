@@ -1,5 +1,9 @@
-@mixin flex {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+@import "../scss/mixins";
+.Profile {
+  @include profile;
+}
+@media screen and (min-device-width: 768px) {
+  .Profile {
+    @include profile-wide-screen;
+  }
 }

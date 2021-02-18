@@ -8,11 +8,12 @@ import { BsShieldLock } from "react-icons/bs";
 import Link from "next/link";
 import Field from "../../../../comp/field";
 import ReCAPTCHA from "react-google-recaptcha";
-import { csrfToken, providers, signIn } from "next-auth/client";
+import { csrfToken, getSession, providers, signIn } from "next-auth/client";
 
-export default function Login({ csrfToken, recaptchaKey, providers }) {
+export default function Login({ session, csrfToken, recaptchaKey, providers }) {
   const {
     t,
+    replace,
     company,
     error,
     loading,
@@ -99,8 +100,15 @@ export default function Login({ csrfToken, recaptchaKey, providers }) {
 }
 
 export async function getServerSideProps(context) {
+  const { res, params } = context;
+  const session = await getSession(context);
+  if (session) {
+    res.statusCode = 302;
+    res.setHeader("Location", `/${params?.company}`);
+  }
   return {
     props: {
+      session: session,
       providers: await providers(),
       csrfToken: await csrfToken(context),
       recaptchaKey: process.env.RECAPTCHA_PUBLIC_KEY,

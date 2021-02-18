@@ -1,0 +1,54 @@
+.bubble {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: repeat(1, auto 1fr auto);
+  width: 70%;
+
+  &.right {
+    float: right;
+
+    .body {
+      background: darken(#fff, 5);
+      border: 1px solid darken(#fff, 10);
+    }
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.7rem;
+    padding: 7px 0;
+
+    .name {
+      padding: 0 5px;
+    }
+  }
+
+  .body {
+    padding: 15px;
+    border: 1px solid darken(#fff, 5);
+    border-radius: 3px;
+    font-size: 0.8rem;
+    background: #fff;
+  }
+
+  .footer,
+  .left,
+  .status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.6rem;
+  }
+
+  .footer {
+    flex-direction: row-reverse;
+    padding: 5px 10px;
+  }
+
+  .status {
+    margin-left: 2px;
+    flex-direction: row-reverse;
+  }
+}
