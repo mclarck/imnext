@@ -27,7 +27,7 @@ const options = {
             user = data;
             // console.log(user)
           }
-          if (user.id) {
+          if (user?.id) {
             // Any object returned will be saved in `user` property of the JWT
             return user
           } else {
@@ -38,8 +38,7 @@ const options = {
             throw token.callbackFailure        // Redirect to a URL 
             // return null
           }
-        } catch (error) {
-          console.log(error.message)
+        } catch (error) { 
           throw token.callbackFailure
         }
       }
@@ -110,7 +109,7 @@ const options = {
    *                           Return `false` to deny access
    *                           Return `string` to redirect to (eg.: "/unauthorized")
    */
-    async signIn(user, account, profile) { 
+    async signIn(user, account, profile) {
       let isAllowedToSignIn = false
       if (user) {
         isAllowedToSignIn = user.status === "active"
@@ -155,8 +154,8 @@ const options = {
     jwt: async (token, user, account, profile, isNewUser) => {
       const isSignIn = (user) ? true : false
       // Add auth_time to token on signin in
-      if (isSignIn) { 
-        token.userId = user.id 
+      if (isSignIn) {
+        token.id = user.id 
         token.name = user.name || user.username
         token.email = user.email
         token.phone = user.email

@@ -8,7 +8,7 @@ export function initializeRest(headers?: any) {
 export const RestCtx = React.createContext<RestManager>(null);
 
 const RestProvider = ({ children, pageProps }) => {
-  const { rest } = pageProps;
+  const { rest } = pageProps; 
   const restMan = new RestManager(rest);
   return <RestCtx.Provider value={restMan}> {children}</RestCtx.Provider>;
 };

@@ -1,6 +1,10 @@
 @import "../scss/mixins";
 .Profile {
   @include profile;
+  .body {
+    @include user-fields;
+    overflow: auto;
+  }
 }
 @media screen and (min-device-width: 768px) {
   .Profile {

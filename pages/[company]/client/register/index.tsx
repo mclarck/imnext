@@ -6,10 +6,16 @@ import Link from "next/link";
 import ReCAPTCHA from "react-google-recaptcha";
 import { BsShieldLock } from "react-icons/bs";
 import useClient from "../useClient";
-import Check from "../../../../comp/check";
-import Field from "../../../../comp/field";
+import Check from "../../../../comp/form/check";
+import Field from "../../../../comp/form/field";
 import Loader from "../../../../comp/loader";
 import { csrfToken } from "next-auth/client";
+import {
+  ContactField,
+  LocationField,
+  PersonalField,
+  PinField,
+} from "../../../../comp/form/fields";
 
 export default function Register({ recaptchaKey, csrfToken }) {
   const {
@@ -39,84 +45,30 @@ export default function Register({ recaptchaKey, csrfToken }) {
             ref={register}
             defaultValue={csrfToken}
           />
-          <div className={style.field}>
-            <Field
-              label={t("Username")}
-              error={error?.username}
-              iconRight={<MdPerson />}
-            >
-              <input type="text" name="username" ref={register} />
-            </Field>
-          </div>
-          <div className={`${style.field} ${style["grid-2"]}`}>
-            <Field label={t("Email")} iconRight={<MdMail />}>
-              <input type="text" name="email" ref={register} />
-            </Field>
-            <Field label={t("Phone")} iconRight={<MdPhone />}>
-              <input type="text" name="phone" ref={register} />
-            </Field>
-          </div>
-          <div className={`${style.field} ${style["grid-2"]}`}>
-            <Field label={t("PIN")} iconRight={<BsShieldLock />}>
-              <input type="password" name="pin" ref={register} />
-            </Field>
-            <Field label={t("Confirm PIN")} iconRight={<BsShieldLock />}>
-              <input type="password" name="vpin" ref={register} />
-            </Field>
-          </div>
-          <div className={style.field}>
-            <Field
-              label={t("Street")}
-              iconRight={<MdLocationOn />}
-              error={error?.address?.street}
-            >
-              <input
-                type="text"
-                name="address.street"
-                ref={register}
-                onBlur={resetAddress}
-              />
-            </Field>
-          </div>
-          <div className={`${style.field} ${style["grid-3"]}`}>
-            <Field label={t("Street Number")}>
-              <input
-                type="text"
-                name="address.number"
-                ref={register}
-                onBlur={resetAddress}
-              />
-            </Field>
-            <Field label={t("Apt")}>
-              <input
-                type="text"
-                name="address.apt"
-                ref={register}
-                onBlur={resetAddress}
-              />
-            </Field>
-            <Field label={t("City")}>
-              <input
-                type="text"
-                defaultValue="CABA, Argentina"
-                name="address.city"
-                readOnly
-                ref={register}
-              />
-            </Field>
-          </div>
+          <PersonalField error={error} register={register} style={style} />
+          <ContactField error={error} register={register} style={style} />
+          <PinField error={error} register={register} style={style} />
+          <LocationField
+            error={error}
+            onBlur={resetAddress}
+            register={register}
+            style={style}
+            defaultValue={{ address: { city: "Buenos Aires, Arg." } }}
+          />
           <div className={style["grid-2"]}>
             <div>
               <Check
-                title="Yes, I accept Terms of Services"
-                onAccept={handleTos}
+                label="Yes, I accept Terms of Services"
+                name="tos"
+                register={register}
               />
               <Check
-                title="Yes, I want to receive specials offers"
-                onAccept={handleOffer}
+                label="Yes, I want to receive specials offers"
+                name="offer"
+                register={register}
               />
             </div>
-            <div>
+            <div className={style.submit}>
               <button type="submit" className="btn btn-flex btn-primary">
                 {t("Register")}
               </button>

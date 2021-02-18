@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { ApolloClient, ApolloProvider } from "@apollo/client";
-import cache from "../../model/cache";
+import { ApolloClient, ApolloProvider } from "@apollo/client"; 
 import { useApollo } from "./apolloClient";
 
 export const GraphqlCtx = React.createContext<ApolloClient<any>>(null);

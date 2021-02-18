@@ -14,7 +14,7 @@ function createApolloClient() {
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
       uri: process.env.API_GRAPHQL_URL, // Server URL (must be absolute)
-      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+      //credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
     }),
     cache: cache,
   })
@@ -61,6 +61,7 @@ export function addApolloState(client, pageProps) {
 
 export function useApollo(pageProps) {
   const state = pageProps[APOLLO_STATE_PROP_NAME]
+  console.log(pageProps)
   const store = useMemo(() => initializeApollo(state), [state])
   return store
 }

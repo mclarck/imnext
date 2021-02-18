@@ -6,7 +6,7 @@ import Loader from "../../../../comp/loader";
 import { MdPerson } from "react-icons/md";
 import { BsShieldLock } from "react-icons/bs";
 import Link from "next/link";
-import Field from "../../../../comp/field";
+import Field from "../../../../comp/form/field";
 import ReCAPTCHA from "react-google-recaptcha";
 import { csrfToken, getSession, providers, signIn } from "next-auth/client";
 

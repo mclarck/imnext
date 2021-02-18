@@ -26,7 +26,7 @@ export default function useClient() {
         try {
             // const recaptchaToken = await recaptcha.current?.executeAsync()
             // data.recaptcha = recaptchaToken
-            const token = { ...prepare(data), company, callbackUrl: `/${company}`, callbackFailure: `/${company}/client/error/login` }
+            const token = { ...prepare(data), company, callbackUrl: `/${company}`, callbackFailure: `/${company}/client/login` }
             signIn("client-login", token)
         } catch (error) {
             alert(JSON.stringify(error))
@@ -36,12 +36,11 @@ export default function useClient() {
 
     async function registration(data: any) {
         try {
-            const recaptchaToken = await recaptcha.current?.executeAsync()
-            data.recaptcha = recaptchaToken
-            data.acceptOffer = offerAccepted
+            // const recaptchaToken = await recaptcha.current?.executeAsync()
+            // data.recaptcha = recaptchaToken
             console.log(data)
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
         }
     }
 
