@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useRef } from 'react'
-import style from './style.module.css'
+import style from './style.module.scss'
 import Bubble, { BubbleType } from '../bubble/Bubble'
 import { BiSend } from 'react-icons/bi'
 import { IoChatbubbleOutline } from 'react-icons/io5'
