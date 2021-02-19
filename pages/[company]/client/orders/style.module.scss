@@ -1,6 +1,51 @@
 @import "../scss/mixins";
 .Orders {
   @include profile;
+  .body {
+    padding: 5px 30px;
+  }
+  .cart {
+    .date {
+      display: grid;
+      grid-template-columns: repeat(1, 20px 1fr);
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      > .icon {
+        width: 22px;
+        height: 22px;
+        font-size: 12px;
+        @include flex;
+        justify-content: center;
+      }
+      div:last-of-type { 
+        height: 20px;
+        @include flex;
+      }
+    }
+    .states {
+      width: 200px;
+      margin: 0 auto;
+      margin-bottom: 40px;
+    }
+    .billing {
+      font-size: 0.8rem;
+      @include flex;
+      justify-content: flex-end;
+      .label {
+        padding: 5px;
+      }
+      .amount {
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+    }
+    .location,
+    .infos {
+      font-size: 0.8rem;
+      padding: 0 5px;
+    }
+  }
 }
 @media screen and (min-device-width: 768px) {
   .Orders {

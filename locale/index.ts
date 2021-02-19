@@ -5,7 +5,7 @@ import es from "./es.json"
 import fr from "./fr.json"
 import pt from "./pt.json"
 
-const locale = "";
+const locale = "es";
 // const language = _locale ? _locale : navigator.language
 // const locale = language.substr(0, 2)
 

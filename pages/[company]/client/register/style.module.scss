@@ -1,12 +1,12 @@
 @import "../scss/mixins";
 .Register {
-  @include user-fields;
+  @include user-fields; 
 }
 @media screen and (min-device-width: 768px) {
   .Register {
     .form {
-      width: 350px;
       margin: 0 auto;
+      padding: 15px 30vw;
     }
   }
 }

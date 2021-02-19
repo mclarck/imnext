@@ -3,7 +3,9 @@
   @include profile;
   .body {
     @include user-fields;
-    overflow: auto;
+    .form {
+      padding: 20px 20px;
+    }
   }
 }
 @media screen and (min-device-width: 768px) {

@@ -1,8 +1,8 @@
-$primary: #00b894;
+$primary: #fff;
 $success: #00b894;
 $danger: #d63031;
 $warning: #fdcb6e;
-$light: #fafafa;
+$light: #c3c3c3;
 $dark: #222;
 
 @mixin flex {
@@ -54,14 +54,14 @@ $dark: #222;
       border-bottom: 1px solid darken($light, 2);
       text-transform: uppercase;
       font-size: 14px;
-      color: lighten($primary, 20);
+      color: darken($primary, 20);
       font-weight: bold;
       border-bottom: 2px solid transparent;
       border-top: 2px solid transparent;
 
       &.active {
         border-bottom: 2px solid darken($light, 2);
-        color: $light;
+        color: darken($primary, 50);
       }
     }
   }
@@ -121,9 +121,7 @@ $dark: #222;
   overflow: hidden;
   .register {
     @include flex;
-    justify-content: center;
-    height: 100%;
-    overflow: auto;
+    overflow: hidden;
   }
 
   .field,
@@ -135,7 +133,10 @@ $dark: #222;
   }
 
   .form {
-    width: 80vw;
+    width: 100%;
+    padding: 15px 20px;
+    height: 100%;
+    overflow: auto;
     margin: 0 auto;
   }
 

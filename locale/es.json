@@ -41,5 +41,8 @@
   "Completed": "Completado",
   "Confirm Address": "Confirmar la direccion",
   "You have been registered": "Te has registrado con éxito",
-  "Continue shopping": "Seguir comprando!"
+  "Continue shopping": "Seguir comprando!",
+  "Transaction id": "Número de transacción",
+  "Amount to pay": "Importe a pagar",
+  "Help": "Ayuda!"
 }

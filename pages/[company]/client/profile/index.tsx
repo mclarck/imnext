@@ -55,7 +55,7 @@ export default function Profile({ company, session }) {
           </nav>
         </div>
         <div className={style.body}>
-          <form onSubmit={handleSubmit(submit)}>
+          <form className={style.form} onSubmit={handleSubmit(submit)}>
             <input
               type="hidden"
               name="id"

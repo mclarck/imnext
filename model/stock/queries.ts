@@ -18,11 +18,13 @@ const GET_STOCKS = gql`
                     devise
                     fraction
                     file{
+                        id
                         uri
                         path
                         name
                     }
                     product{
+                        id
                         specie
                         mark
                         variety

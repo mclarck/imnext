@@ -35,6 +35,7 @@ const GET_FULL_CLIENT = gql`
                 edges{
                     node{
                         id
+                        _id
                         created
                         amount
                         status
@@ -52,6 +53,7 @@ const GET_FULL_CLIENT = gql`
                                         shipping
                                         shippingAdditional
                                         file{
+                                            id
                                             uri
                                             path
                                             name
