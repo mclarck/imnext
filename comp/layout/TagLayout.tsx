@@ -3,6 +3,7 @@ import style from "./style.module.scss";
 import { HiChevronRight } from "react-icons/hi";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { t } from "../../locale";
 
 export default function TagLayout({
   children,
@@ -31,7 +32,7 @@ export default function TagLayout({
           <ul>
             <li>
               <a href={`/${company}/stocks/${title}`}>
-                <span className={style.name}>more</span>
+                <span className={style.name}>{t("more")}</span>
                 <span className={style.icon}>
                   <HiChevronRight />
                 </span>

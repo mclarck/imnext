@@ -20,6 +20,8 @@
       font-size: 0.8rem;
       font-weight: bold;
       text-transform: capitalize;
+      padding: 10px 20px;
+      border-bottom: 1px solid darken(#fff, 15);
     }
     .actions {
       ul {
@@ -78,14 +80,15 @@
   > .wrapper {
     background-color: #fff;
     width: auto;
+    border-radius: 5px;
     > .header {
       .close {
         border: none;
         background: none;
         outline: none;
         cursor: pointer;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         display: grid;
         place-content: center;
         float: right;
@@ -95,6 +98,9 @@
         &:hover {
           color: lighten(#222, 30);
         }
+      }
+      .close {
+        font-size: 16px;
       }
     }
   }

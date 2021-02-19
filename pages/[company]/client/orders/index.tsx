@@ -4,6 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import { BiCalendarEvent } from "react-icons/bi";
+import { RiCloseCircleFill } from "react-icons/ri";
 import { MainLayout } from "../../../../comp/layout";
 import Loader from "../../../../comp/loader";
 import { Order } from "../../../../comp/order";
@@ -13,7 +14,10 @@ import style from "./style.module.scss";
 import useOrders from "./useOrders";
 
 export default function Orders({ company, session }) {
-  const { client, carts, loading } = useOrders({ session, company });
+  const { orderState, cancelOrder, client, carts, loading } = useOrders({
+    session,
+    company,
+  });
   if (loading) return <Loader />;
   return (
     <MainLayout>
@@ -50,6 +54,14 @@ export default function Orders({ company, session }) {
           {carts?.map((o, index) => {
             const cart = o.node?.orders?.edges;
             const transac = o.node;
+            console.log(transac.status);
+            if (
+              !["active", "shipping", "arrived", "canceled"].includes(
+                transac.status
+              )
+            ) {
+              return null;
+            }
             return (
               <React.Fragment key={index}>
                 <div className={style.cart}>
@@ -84,12 +96,26 @@ export default function Orders({ company, session }) {
                     </div>
                     <OrderState
                       style={style.states}
+                      active={orderState}
                       states={[
-                        { state: "preparing", label: t("Preparing") },
+                        { state: "active", label: t("Preparing") },
                         { state: "shipping", label: t("On way") },
                         { state: "arrived", label: t("Arrived") },
+                        { state: "canceled", label: t("Canceled") },
                       ]}
                     />
+                    <div className={style.actions}>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => cancelOrder(transac)}
+                      >
+                        <div>{t("Cancel")}</div>
+                        <div className={style.icon}>
+                          <RiCloseCircleFill />
+                        </div>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </React.Fragment>
@@ -112,6 +138,9 @@ export async function getServerSideProps(context) {
     props: {
       company: params.company,
       session: session,
+      rest: {
+        uri: process.env.API_REST_URL,
+      },
     },
   };
 }

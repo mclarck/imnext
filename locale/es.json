@@ -44,5 +44,10 @@
   "Continue shopping": "Seguir comprando!",
   "Transaction id": "Número de transacción",
   "Amount to pay": "Importe a pagar",
-  "Help": "Ayuda!"
+  "Help": "Ayuda!",
+  "more": "Ver mas",
+  "I understand": "Sí, Entendido",
+  "ex: food:pizza": "ej: comida:pizza",
+  "Important announcement": "Aviso Importante!",
+  "minor advice": "Esta tienda ofrece productos que no están destinados a menores. El tabaquismo y el alcohol pueden dañar su salud. Tómelo con moderación."
 }

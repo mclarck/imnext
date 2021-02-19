@@ -1,0 +1,28 @@
+.Advice {
+  width: 70vw;
+  .message {
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    .title {
+      font-weight: bold;
+      padding: 10px 0;
+    }
+    .content {
+      font-size: 0.8rem;
+    }
+  }
+}
+.footer {
+  padding: 5px 5px;
+  text-align: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+@media screen and (min-device-width: 768px) {
+  .Advice {
+    width: 300px;
+  }
+}

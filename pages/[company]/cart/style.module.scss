@@ -51,9 +51,31 @@
   }
 }
 
+.message {
+  padding: 20px;
+  font-size: 0.8rem;
+  text-align: center;
+  .title {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .content {
+    font-size: 0.9rem;
+    padding: 5px 0;
+  }
+}
+
+.footer {
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @media screen and (min-device-width: 768px) {
   .Cart {
-    .content {
+    > .content {
       display: grid;
       grid-template-columns: repeat(1, 1fr 250px);
       width: 60vw;

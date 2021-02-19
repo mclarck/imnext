@@ -2,9 +2,10 @@ import { useQuery } from "@apollo/client";
 import _ from "lodash";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { t } from "../../../locale";
 import useCartModel, { GET_CART_ITEMS } from "../../../model/cart";
+import { RestCtx } from "../../../services/rest";
 import { useCalculator } from "../../../services/utils";
 
 export default function useCart() {
@@ -14,11 +15,12 @@ export default function useCart() {
     } = useRouter();
     const { data: cart, error, refetch } = useQuery(GET_CART_ITEMS)
     const { remove, clear } = useCartModel()
-    const [alert] = useState()
+    const [isOrderSent, setIsOrderSent] = useState(false)
     const { subTotal, shipment, amount } = useCalculator(cart?.items)
     const [session, loading] = useSession()
+    const rest = useContext(RestCtx)
+    const client: any = session.user
 
-    if (error) console.log(error.message)
 
     const bills = [
         { name: t("SubTotal"), value: subTotal() },
@@ -26,10 +28,28 @@ export default function useCart() {
         { name: t("Total"), value: amount(), isTotal: true }
     ]
 
-    function pay() {
-        console.log('process payment')
-        clear()
-        replace(`${company}/payment/success`)
+    function handleError(error) {
+        if (error) console.log(error.message)
+    }
+
+    async function processPayment() {
+        try {
+            const transaction = {
+                type: "cash",
+                amount: parseFloat(amount()),
+                shipping: parseFloat(shipment()),
+                client: `/api/clients/${client?.id}`,
+                orders: _.map(cart?.items, (o) => ({ quantity: o.quantity, stock: o.stock?.id }))
+            }
+            const response = await rest.mutate("POST", "/api/operations", transaction)
+            if (response.ok) {
+                transactionSuccess(await response.json())
+            }else{
+                alert(t("An error has occured during the transaction, please contact us"))
+            }
+        } catch (error) {
+            handleError(error)
+        }
     }
 
     function onRemove(order) {
@@ -37,5 +57,25 @@ export default function useCart() {
         refetch()
     }
 
-    return { session, replace, loading, company, isEmptyCart: _.isEmpty(cart?.items), cart: cart?.items, bills, pay, alert, remove: onRemove }
+    function onClickMyOrders() {
+        clear()
+        replace(`/${company}/client/orders`)
+    }
+    function onClickKeepShopping() {
+        clear()
+        replace(`/${company}`)
+    }
+
+    function transactionSuccess(transaction?: any) {
+        console.log(transaction)
+        setIsOrderSent(true)
+    }
+
+    function notifyTransaction() {
+
+    }
+
+    handleError(error)
+
+    return { onClickKeepShopping, onClickMyOrders, session, isOrderSent, replace, loading, company, isEmptyCart: _.isEmpty(cart?.items), cart: cart?.items, bills, processPayment, remove: onRemove }
 }

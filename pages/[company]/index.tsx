@@ -1,71 +1,65 @@
-import { t } from "i18n-js";
 import Head from "next/head";
-import React from "react"; 
+import React from "react";
+import { Advice } from "../../comp/advice";
 import { Article } from "../../comp/article";
-import { MainLayout, TagLayout } from "../../comp/layout";
+import { MainLayout, Modal, TagLayout } from "../../comp/layout";
+import Loader from "../../comp/loader";
 import { Search } from "../../comp/search";
-import { TagList } from "../../comp/taglist";
 import { TagSlider } from "../../comp/tagslider";
-import { GET_STOCKS } from "../../model/stock/queries";
-import { initializeApollo } from "../../services/graphql/apolloClient";
+import { t } from "../../locale";
 import useStocks from "./stocks/useStocks";
 import style from "./style.module.scss";
 
-export default function StockOverview({ stocks }) {
-  const { company, category, addToCart } = useStocks();
+export default function StockOverview() {
+  const {
+    company,
+    onSearch,
+    filter,
+    filterKey,
+    stocks,
+    loading,
+    getTags,
+    addToCart,
+  } = useStocks();
+  const tags = getTags();
+  if (loading) return <Loader />;
   return (
     <MainLayout>
       <Head>
-        <title>{company} Stock Overview</title>
+        <title>
+          {company} - {t("Stock Overview")}
+        </title>
       </Head>
       <div className={style.overView}>
         <div className={style.search}>
-          <Search size="lg" onSearch={(key: string) => {}} />
+          <Search size="lg" onSearch={onSearch} advanced />
         </div>
         <div className={style.slider}>
-          <TagSlider
-            slides={[() => <TagList />, () => <TagList />, () => <TagList />]}
-          />
+          <TagSlider tags={tags} />
         </div>
         <section className={style.articles}>
-          <div className={style.article}>
-            <TagLayout
-              title="Cerverza"
-              subtitle="Some description about cerveza"
-            >
-              {stocks?.map((stock, idx) => (
-                <Article
-                  key={idx}
-                  onAddToCart={(o) => addToCart({ ...o, stock: stock.node })}
-                  data={stock.node}
-                  AddToCartLabel={t("Add to Cart")}
-                />
-              ))}
-            </TagLayout>
-          </div>
+          {tags?.map((tag, index) => {
+            if (filterKey && filterKey !== tag) return null;
+            return (
+              <div key={index} className={style.article}>
+                <TagLayout title={tag}>
+                  {filter(stocks)?.map((stock, idx) => (
+                    <Article
+                      key={idx}
+                      onAddToCart={(o) =>
+                        addToCart({ ...o, stock: stock.node })
+                      }
+                      data={stock.node}
+                      AddToCartLabel={t("Add to Cart")}
+                    />
+                  ))}
+                </TagLayout>
+              </div>
+            );
+          })}
         </section>
       </div>
+      <Advice />
     </MainLayout>
   );
-}
-
-export async function getStaticPaths() {
-  const paths = [{ params: { company: "kioskito" } }];
-  // fetch all my companies
-  return { paths, fallback: false };
-}
-
-export async function getStaticProps() {
-  const apollo = initializeApollo();
-  let stocks: any = {};
-  try {
-    stocks = await apollo.query({ query: GET_STOCKS });
-  } catch (error) {
-    console.log(error.message);
-  }
-  return {
-    props: {
-      stocks: stocks?.data?.stocks?.edges || null,
-    },
-  };
 }

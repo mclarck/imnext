@@ -5,9 +5,11 @@ import { MdClose } from "react-icons/md";
 export default function Modal({
   children,
   onClose,
+  footer, 
 }: {
   children: any;
   onClose?: Function;
+  footer?: any; 
 }) {
   function handleClick() {
     onClose && onClose();
@@ -23,6 +25,7 @@ export default function Modal({
           </div>
         </div>
         <div className={style.body}>{children}</div>
+        {footer && <div className={style.footer}>{footer}</div>}
       </div>
     </div>
   );

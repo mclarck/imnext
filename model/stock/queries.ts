@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client'
+import { gql } from '@apollo/client'
 
 const GET_STOCKS = gql`
     query GetStocks {
@@ -35,5 +35,18 @@ const GET_STOCKS = gql`
         }
     }`
 
+const GET_ALL_SPECIES = gql`
+query GetStocks {
+    stocks { 
+        edges {
+            node {
+                product{
+                    specie
+                }
+            }
+        }
+    }
+}
+`
 
-export {GET_STOCKS}
+export { GET_STOCKS, GET_ALL_SPECIES }
