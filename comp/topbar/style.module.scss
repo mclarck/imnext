@@ -1,3 +1,6 @@
+@import "../../styles/vars";
+@import "../../styles/bg";
+
 @mixin flex {
   display: flex;
   flex-direction: row;
@@ -7,6 +10,8 @@
   box-sizing: border-box;
   @include flex;
   justify-content: space-between;
+  @include white-bg;
+  border-bottom: 1px solid darken($light, 3);
 
   > ul {
     @include flex;

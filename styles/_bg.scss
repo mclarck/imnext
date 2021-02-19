@@ -1,0 +1,14 @@
+@import "./vars";
+
+@mixin light-bg {
+  background-color: lighten($city-light, 10);
+}
+@mixin white-bg {
+  background: #fff;
+  * {
+    color: lighten($dark, 20);
+    &.active {
+      color: lighten($dark, 20);
+    }
+  }
+}

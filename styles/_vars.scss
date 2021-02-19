@@ -1,5 +1,21 @@
-$primary: #00b894;
-$success: #00b894;
-$danger: #d63031;
-$warning: #fdcb6e;
+$violet-base: #845ecc;
+$violet-clean: #9b89bb;
+$violet-light: #fef7ff;
+$violet-dark: #4b4455;
+$yellow-light: #fefedd;
+$green-tea: #00c0aa;
+$green-leaf: #008966;
+$green-blue: #00b894;
+$city-light: #dfe6e9;
+
+$red-base: #d63031;
+$yellow-base: #fdcb6e;
 $light: #fafafa;
+$dark: #222;
+//////
+$primary: $violet-clean;
+$secondary: $violet-base;
+$success: $green-tea;
+$warning: $yellow-base;
+$danger: $red-base;
+

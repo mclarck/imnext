@@ -1,9 +1,5 @@
-$primary: #fff;
-$success: #00b894;
-$danger: #d63031;
-$warning: #fdcb6e;
-$light: #c3c3c3;
-$dark: #222;
+@import "../../../../styles/vars";
+@import "../../../../styles/bg";
 
 @mixin flex {
   display: flex;
@@ -22,7 +18,7 @@ $dark: #222;
   }
 
   .tabs {
-    background: $primary;
+    @include white-bg;
   }
 
   .tabs > ul {
@@ -54,20 +50,20 @@ $dark: #222;
       border-bottom: 1px solid darken($light, 2);
       text-transform: uppercase;
       font-size: 14px;
-      color: darken($primary, 20);
       font-weight: bold;
       border-bottom: 2px solid transparent;
       border-top: 2px solid transparent;
+      color: darken($light, 10);
 
       &.active {
-        border-bottom: 2px solid darken($light, 2);
-        color: darken($primary, 50);
+        border-bottom: 2px solid darken($light, 20);
       }
     }
   }
 
   .body {
     overflow: auto;
+    border-top: 1px solid darken($light, 3);
   }
 }
 

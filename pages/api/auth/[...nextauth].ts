@@ -169,12 +169,13 @@ const options = {
     * @param  {string} baseUrl  Default base URL of site (can be used as fallback)
     * @return {string}          URL the client will be redirect to
     */
-    async redirect(url, baseUrl) {
-      // console.log(baseUrl, "redirect")
-      return url.startsWith(baseUrl)
-        ? url
-        : baseUrl
-    }
+    // async redirect(url, baseUrl) {
+    //   console.log(baseUrl, "base url to redirect ...")
+    //   console.log(url, "url to redirect ...")
+    //   return url.startsWith(baseUrl)
+    //     ? url
+    //     : baseUrl
+    // }
   },
 
   // You can define custom pages to override the built-in pages

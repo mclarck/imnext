@@ -11,7 +11,7 @@ import style from "./style.module.scss";
 import useCart from "./useCart";
 
 function AfterOrderMessage({
-  isOrderSent,
+  isOrderSent, 
   onClickMyOrders,
   onClickKeepShopping,
 }) {
@@ -52,10 +52,7 @@ function AfterOrderMessage({
       }
     >
       <div className={style.message}>
-        <div className={style.title}>{t("Than you for choosing us")}</div>
-        <div className={style.subtitle}>
-          {t("Your order has been passed succesfully")}
-        </div>
+        <div className={style.title}>{t("Thank you for choosing us")}</div>
         <div className={style.content}>
           {t("Your order has been passed succesfully")}
         </div>
@@ -122,7 +119,7 @@ export default function Cart({ session, company }) {
             </div>
           )}
         </div>
-        <AfterOrderMessage
+        <AfterOrderMessage 
           onClickMyOrders={onClickMyOrders}
           onClickKeepShopping={onClickKeepShopping}
           isOrderSent={isOrderSent}

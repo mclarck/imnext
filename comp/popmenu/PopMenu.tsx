@@ -6,7 +6,7 @@ import { t } from "../../locale";
 import Link from "next/link";
 
 export default function PopMenu() {
-  const { show, visible, company, session } = usePopMenu();
+  const { show, logOut, visible, company, session } = usePopMenu();
   return (
     <div className={style.PopMenu}>
       <button className={style.icon} onClick={show}>
@@ -47,17 +47,19 @@ export default function PopMenu() {
                   </Link>
                 </li>
                 <li className={style.item}>
-                  <Link href={`/api/auth/signout`}>
-                    <a className={style.link}>{t("Logout")}</a>
+                  <Link href={`/${company}`}>
+                    <a className={style.link} onClick={logOut}>
+                      {t("Logout")}
+                    </a>
                   </Link>
                 </li>
               </React.Fragment>
             )}
-            <li className={style.item}>
+            {/* <li className={style.item}>
               <Link href={`/${company}/client/help`}>
                 <a className={style.link}>{t("Help")}</a>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </nav>
       )}

@@ -2,12 +2,13 @@
 
 .btn {
   border: none;
-  background: none;
+  background: #fff;
   outline: none;
   font-weight: bold;
   font-size: 0.8rem;
-  padding: 8px 20px;
+  padding: 0 20px;
   margin: 0;
+  height: 40px;
   border-radius: 3px;
   display: flex;
   flex-direction: row;
@@ -33,6 +34,7 @@
     }
     &-link {
       font-weight: normal;
+      background: none;
     }
     &-primary {
       color: #fff;
@@ -45,7 +47,7 @@
       color: #fff;
       background: $success;
       &:hover {
-        background: lighten($primary, 2);
+        background: lighten($success, 2);
       }
     }
   }

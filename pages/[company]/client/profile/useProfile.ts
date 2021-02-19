@@ -39,11 +39,11 @@ export default function useProfile(session) {
     }
     async function confirmLocation() {
         return new Promise((resolve, reject) => {
-            const isOk = window.confirm(t("Address is correct?"))
+            const isOk = window.confirm(t("Is it the good address?"))
             if (isOk) {
                 resolve(true)
             }
-            reject({ address: { street: t("Please confirm location.") }, message: "location unconfirmed" })
+            reject({ address: { street: t("Please, confirm location") }, message: "location unconfirmed" })
         })
     }
     async function submit(data: any) {

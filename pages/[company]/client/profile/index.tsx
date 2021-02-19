@@ -88,13 +88,13 @@ export default function Profile({ company, session }) {
             <div className={style["grid-2"]}>
               <div>
                 <Check
-                  label="Yes, I want to receive specials offers"
+                  label={t("Yes, I want to receive specials offers")}
                   name="offer"
                   register={register}
                 />
               </div>
               <div className={style.submit}>
-                <button type="submit" className="btn btn-flex btn-primary">
+                <button type="submit" className="btn btn-primary">
                   {t("Update")}
                 </button>
               </div>
@@ -121,10 +121,10 @@ export async function getServerSideProps(context) {
         uri: process.env.API_REST_URL,
         headers: { "IM-COMPANY": params?.company },
       },
-      graphql:{
+      graphql: {
         uri: process.env.API_GRAPHQL_URL,
         headers: { "IM-COMPANY": params?.company },
-      }
+      },
     },
   };
 }

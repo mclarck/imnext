@@ -49,5 +49,18 @@
   "I understand": "Sí, Entendido",
   "ex: food:pizza": "ej: comida:pizza",
   "Important announcement": "Aviso Importante!",
-  "minor advice": "Esta tienda ofrece productos que no están destinados a menores. El tabaquismo y el alcohol pueden dañar su salud. Tómelo con moderación."
+  "minor advice": "Esta tienda ofrece productos que no están destinados a menores. El tabaquismo y el alcohol pueden dañar su salud. Tómelo con moderación.",
+  "Yes, I accept the terms of services": "Sí, acepto las condiciones de servicio",
+  "Yes, I want to receive specials offers": "Sí, quiero recibir ofertas especiales.",
+  "Already have an account?": "¿Ya tienes una cuenta?",
+  "apt": "dept",
+  "Forgot your PIN ?": "Olvidaste tú PIN ?",
+  "Confirm PIN": "Confirm. PIN",
+  "Cancel": "Cancelar",
+  "Thank you for choosing us": "Gracias por elegirnos!",
+  "Your order has been passed succesfully": "Su pedido fue enviado con éxito!",
+  "Order will be canceled, continue?": "Se cancelará el pedido. ¿Continuar?",
+  "Is it the good address?": "¿Es la buena dirección?",
+  "Please, confirm location": "Confirmar ubicación",
+  "Invalid location": "Dirección inválida"
 }

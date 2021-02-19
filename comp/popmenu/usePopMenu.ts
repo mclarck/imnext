@@ -1,7 +1,8 @@
-import { useSession } from "next-auth/client";
+import { signout, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useRef } from "react";
+import { t } from "../../locale";
 
 const usePopMenu = () => {
     const [session, loading] = useSession()
@@ -27,6 +28,14 @@ const usePopMenu = () => {
         }
     }, [handleClick])
 
-    return { hide, company, menu, show, visible, session, loading }
+    async function logOut(e: any) {
+        e.preventDefault()
+        if(await confirm(t("Disconnect ?"))){
+            console.log('will signout')
+            signout({ callbackUrl: `/kioskito` })
+        }
+    }
+
+    return { hide, logOut, company, menu, show, visible, session, loading }
 }
 export default usePopMenu

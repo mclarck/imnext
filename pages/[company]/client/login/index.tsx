@@ -70,11 +70,11 @@ export default function Login({ session, csrfToken, recaptchaKey, providers }) {
           </div>
           <div className={style.field}>
             <Link href={`/${company}/client/help`}>
-              <a className="btn btn-link btn-right">{t("Forget your PIN ?")}</a>
+              <a className="btn btn-link btn-right">{t("Forgot your PIN ?")}</a>
             </Link>
           </div>
           <div className={style.submit}>
-            <button type="submit" className="btn btn-flex btn-primary">
+            <button type="submit" className="btn btn-success">
               {t("Login")}
             </button>
           </div>

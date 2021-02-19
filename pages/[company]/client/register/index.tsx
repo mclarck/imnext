@@ -58,18 +58,18 @@ export default function Register({ recaptchaKey, csrfToken }) {
           <div className={style["grid-2"]}>
             <div>
               <Check
-                label="Yes, I accept Terms of Services"
+                label={t("Yes, I accept the terms of services")}
                 name="tos"
                 register={register}
               />
               <Check
-                label="Yes, I want to receive specials offers"
+                label={t("Yes, I want to receive specials offers")}
                 name="offer"
                 register={register}
               />
             </div>
             <div className={style.submit}>
-              <button type="submit" className="btn btn-flex btn-primary">
+              <button type="submit" className="btn btn-success">
                 {t("Register")}
               </button>
             </div>

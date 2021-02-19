@@ -1,6 +1,7 @@
 @import "../scss/mixins";
 .Register {
   @include user-fields; 
+  overflow: auto;
 }
 @media screen and (min-device-width: 768px) {
   .Register {

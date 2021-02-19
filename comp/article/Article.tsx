@@ -70,7 +70,7 @@ export default function Article({
             <div className={style.actions}>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-success"
                 onClick={submit}
               >
                 {AddToCartLabel || t("Add To Cart")}

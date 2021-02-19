@@ -11,11 +11,13 @@ import { useCalculator } from "../../../services/utils";
 export default function useCart() {
     const {
         query: { company },
-        replace
+        replace,
+        isReady
     } = useRouter();
     const { data: cart, error, refetch } = useQuery(GET_CART_ITEMS)
     const { remove, clear } = useCartModel()
     const [isOrderSent, setIsOrderSent] = useState(false)
+    const [processing, setIsProccesing] = useState(false)
     const { subTotal, shipment, amount } = useCalculator(cart?.items)
     const [session, loading] = useSession()
     const rest = useContext(RestCtx)
@@ -34,6 +36,7 @@ export default function useCart() {
 
     async function processPayment() {
         try {
+            setIsProccesing(true)
             const transaction = {
                 type: "cash",
                 amount: parseFloat(amount()),
@@ -44,11 +47,13 @@ export default function useCart() {
             const response = await rest.mutate("POST", "/api/operations", transaction)
             if (response.ok) {
                 transactionSuccess(await response.json())
-            }else{
+            } else {
                 alert(t("An error has occured during the transaction, please contact us"))
             }
         } catch (error) {
             handleError(error)
+        } finally {
+            setIsProccesing(false)
         }
     }
 
@@ -77,5 +82,5 @@ export default function useCart() {
 
     handleError(error)
 
-    return { onClickKeepShopping, onClickMyOrders, session, isOrderSent, replace, loading, company, isEmptyCart: _.isEmpty(cart?.items), cart: cart?.items, bills, processPayment, remove: onRemove }
+    return { onClickKeepShopping, onClickMyOrders, session, isOrderSent, replace, loading: !isReady || loading || processing, company, isEmptyCart: _.isEmpty(cart?.items), cart: cart?.items, bills, processPayment, remove: onRemove }
 }

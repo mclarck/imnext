@@ -54,7 +54,6 @@ export default function Orders({ company, session }) {
           {carts?.map((o, index) => {
             const cart = o.node?.orders?.edges;
             const transac = o.node;
-            console.log(transac.status);
             if (
               !["active", "shipping", "arrived", "canceled"].includes(
                 transac.status
@@ -65,14 +64,6 @@ export default function Orders({ company, session }) {
             return (
               <React.Fragment key={index}>
                 <div className={style.cart}>
-                  <div className={style.date}>
-                    <div className={style.icon}>
-                      <BiCalendarEvent />
-                    </div>
-                    <div>
-                      {moment(transac.created).locale(locale).calendar()}
-                    </div>
-                  </div>
                   <div className={style.infos}>
                     {t("Transaction id")}: 00{transac._id}
                   </div>
@@ -80,6 +71,14 @@ export default function Orders({ company, session }) {
                     {t("Deliver to")} {client?.username}, {t("apt")}{" "}
                     {client?.address?.apt} {client?.address?.street}{" "}
                     {client?.address?.number}
+                  </div>
+                  <div className={style.date}>
+                    <div className={style.icon}>
+                      <BiCalendarEvent />
+                    </div>
+                    <div>
+                      {moment(transac.created).locale(locale).calendar()}
+                    </div>
                   </div>
                   <div className={style.items}>
                     {cart?.map((order, idx) => {
@@ -107,7 +106,7 @@ export default function Orders({ company, session }) {
                     <div className={style.actions}>
                       <button
                         type="button"
-                        className="btn btn-danger"
+                        className="btn btn-link"
                         onClick={() => cancelOrder(transac)}
                       >
                         <div>{t("Cancel")}</div>
