@@ -13,7 +13,6 @@ const options = {
           const rest = initializeRest({ 'IM-COMPANY': token.company })
           const res = await rest.mutate("POST", process.env.API_CLIENT_LOGIN, token)
           const user = await res.json()
-          console.log(user)
           return user
         } catch (error) {
           console.log(error.message)
@@ -45,7 +44,6 @@ const options = {
       return false;
     },
     async redirect(url, baseUrl) {
-      console.log(url, "is redirected to")
       return url
     },
     session: async (session, user) => {
@@ -58,10 +56,13 @@ const options = {
     jwt: async (token, user, account, profile, isNewUser) => {
       const isSignIn = (user) ? true : false
       if (isSignIn) {
-        token.id = user.id
+        token.id = user.roles ? `/api/users/${user.id}` : `/api/clients/${user.id}`
+        token._id = user.id
         token.name = user.name || user.username
         token.email = user.email
-        token.phone = user.email
+        token.phone = user.phone
+        token.status = user.status
+        token.roles = user.roles || ["ROLE_CLIENT"]
         token.auth_time = Math.floor(Date.now() / 1000)
       }
       return Promise.resolve(token)

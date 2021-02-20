@@ -10,6 +10,7 @@ import Loader from "../../../../comp/loader";
 import { Order } from "../../../../comp/order";
 import { OrderState } from "../../../../comp/orderstate";
 import { locale, t } from "../../../../locale";
+import { getCommonProps } from "../../../../services/common";
 import style from "./style.module.scss";
 import useOrders from "./useOrders";
 
@@ -133,13 +134,11 @@ export async function getServerSideProps(context) {
     res.statusCode = 302;
     res.setHeader("Location", `/${params?.company}/client/login`);
   }
+  const props = { ...getCommonProps(context) };
   return {
-    props: {
-      company: params.company,
-      session: session,
-      rest: {
-        uri: process.env.API_REST_URL,
-      },
+    props: { 
+      ...props,
+      session: session, 
     },
   };
 }

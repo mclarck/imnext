@@ -9,6 +9,7 @@ import Link from "next/link";
 import Field from "../../../../comp/form/field";
 import ReCAPTCHA from "react-google-recaptcha";
 import { csrfToken, getSession, providers, signIn } from "next-auth/client";
+import { getCommonProps } from "../../../../services/common";
 
 export default function Login({ session, csrfToken, recaptchaKey, providers }) {
   const {
@@ -106,15 +107,14 @@ export async function getServerSideProps(context) {
     res.statusCode = 302;
     res.setHeader("Location", `/${params?.company}`);
   }
+  const props = { ...getCommonProps(context) };
   return {
     props: {
+      ...props,
       session: session,
       providers: await providers(),
       csrfToken: await csrfToken(context),
       recaptchaKey: process.env.RECAPTCHA_PUBLIC_KEY,
-      rest: {
-        uri: process.env.API_REST_URL,
-      },
     },
   };
 }

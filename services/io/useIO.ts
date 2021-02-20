@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { Manager } from "socket.io-client"
 import { Howl } from 'howler';
 
-const useIO = () => {
+const useIO = ({ io, session }) => {
     const [chat, setChat] = useState<any>()
     const [analytic, setAnalytic] = useState<any>()
 
@@ -34,16 +34,21 @@ const useIO = () => {
         const id = payload?.content?.id
     }
     const handleChat = (socket: SocketIOClient.Socket) => {
-        // we need to join a room
-        // client need to join his phone
-        // socket.emit("join", {room: sender?.phone})
-        // socket.emit("register", {content: sender})
-        socket.on("join", onJoin)
-        socket.on("message", onMsg)
+        if (socket) {
+            // we need to join a room
+            // client need to join his phone
+            console.log(session?.user, "handleChat")
+            socket.emit("join", { room: "1122545810" })
+            socket.emit("register", { content: { username: "mclarck", phone: "122545810" } })
+            socket.on("join", onJoin)
+            socket.on("message", onMsg)
+        }
     }
     const handleAnalytic = (socket: SocketIOClient.Socket) => {
-        // socket.emit("join", {room: "analytic@" + company})
-        socket.on("message", onAnalEvent)
+        if (socket) {
+            socket.emit("join", { room: "analytic@" + "Kioskito" })
+            socket.on("message", onAnalEvent)
+        }
     }
     const cleanChat = (socket: SocketIOClient.Socket) => {
         if (socket) {
@@ -60,16 +65,18 @@ const useIO = () => {
     }
 
     useEffect(() => {
-        const manager = new Manager(process.env.SOCKET_URL, {})
-        const chat = manager.socket("/chat")
-        const anal = manager.socket("/analytic")
-        handleChat(chat)
-        handleAnalytic(anal)
-        setChat(chat)
-        setAnalytic(anal)
+        if (io) {
+            const manager = new Manager(io?.uri, { ...io?.options })
+            const chat = manager.socket("/chat")
+            const analytic = manager.socket("/analytic")
+            handleChat(chat)
+            handleAnalytic(analytic)
+            setChat(chat)
+            setAnalytic(analytic)
+        }
         return () => {
             cleanChat(chat)
-            cleanAnalytic(anal)
+            cleanAnalytic(analytic)
         }
     }, [])
 

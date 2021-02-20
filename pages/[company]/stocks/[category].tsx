@@ -6,6 +6,7 @@ import Loader from "../../../comp/loader";
 import { Search } from "../../../comp/search";
 import { TagSlider } from "../../../comp/tagslider";
 import { t } from "../../../locale";
+import { getCommonProps } from "../../../services/common";
 import style from "../style.module.scss";
 import useStocks from "./useStocks";
 
@@ -60,4 +61,17 @@ export default function StockCategory() {
       </div>
     </MainLayout>
   );
+}
+
+
+export async function getServerSideProps(context) {
+  const { res, params } = context;
+  if (params.company !== "Kioskito") {
+  }
+  const props = { ...getCommonProps(context) };
+  return {
+    props: {
+      ...props,
+    },
+  };
 }

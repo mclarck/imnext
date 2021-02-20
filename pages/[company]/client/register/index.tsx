@@ -16,6 +16,7 @@ import {
   PersonalField,
   PinField,
 } from "../../../../comp/form/fields";
+import { getCommonProps } from "../../../../services/common";
 
 export default function Register({ recaptchaKey, csrfToken }) {
   const {
@@ -99,13 +100,12 @@ export default function Register({ recaptchaKey, csrfToken }) {
 }
 
 export async function getServerSideProps(context) {
+  const props = { ...getCommonProps(context) };
   return {
     props: {
+      ...props,
       csrfToken: await csrfToken(context),
-      recaptchaKey: process.env.RECAPTCHA_PUBLIC_KEY,
-      rest: {
-        uri: process.env.API_REST_URL,
-      },
+      recaptchaKey: process.env.RECAPTCHA_PUBLIC_KEY
     },
   };
 }

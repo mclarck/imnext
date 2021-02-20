@@ -8,6 +8,7 @@ import Loader from "../../comp/loader";
 import { Search } from "../../comp/search";
 import { TagSlider } from "../../comp/tagslider";
 import { t } from "../../locale";
+import { getCommonProps } from "../../services/common";
 import useStocks from "./stocks/useStocks";
 import style from "./style.module.scss";
 
@@ -68,12 +69,11 @@ export default function StockOverview() {
 export async function getServerSideProps(context) {
   const { res, params } = context;
   if (params.company !== "Kioskito") {
-    res.statusCode = 302; 
-    res.setHeader("Location", `/errors/404`);
   }
+  const props = { ...getCommonProps(context) };
   return {
     props: {
-      company: params.company,
+      ...props,
     },
   };
 }

@@ -10,11 +10,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <GraphqlProvider pageProps={pageProps}>
       <RestProvider pageProps={pageProps}>
-        {/* <SocketIOProvider> */}
-        <Provider session={session}>
-          <Component {...pageProps} />
-        </Provider>
-        {/* </SocketIOProvider> */}
+        <SocketIOProvider pageProps={pageProps}>
+          <Provider session={session}>
+            <Component {...pageProps} />
+          </Provider>
+        </SocketIOProvider>
       </RestProvider>
     </GraphqlProvider>
   );

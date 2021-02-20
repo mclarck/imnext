@@ -7,11 +7,12 @@ import { MainLayout, Modal } from "../../../comp/layout";
 import Loader from "../../../comp/loader";
 import { Order } from "../../../comp/order";
 import { t } from "../../../locale";
+import { getCommonProps } from "../../../services/common";
 import style from "./style.module.scss";
 import useCart from "./useCart";
 
 function AfterOrderMessage({
-  isOrderSent, 
+  isOrderSent,
   onClickMyOrders,
   onClickKeepShopping,
 }) {
@@ -119,7 +120,7 @@ export default function Cart({ session, company }) {
             </div>
           )}
         </div>
-        <AfterOrderMessage 
+        <AfterOrderMessage
           onClickMyOrders={onClickMyOrders}
           onClickKeepShopping={onClickKeepShopping}
           isOrderSent={isOrderSent}
@@ -132,18 +133,16 @@ export default function Cart({ session, company }) {
 export async function getServerSideProps(context) {
   const { res, params } = context;
   const session = await getSession(context);
-  console.log(session)
+  console.log(session);
   if (!session) {
     res.statusCode = 302;
     res.setHeader("Location", `/${params?.company}/client/login`);
   }
+  const props = { ...getCommonProps(context) };
   return {
     props: {
-      company: params.company,
+      ...props,
       session: session,
-      rest: {
-        uri: process.env.API_REST_URL,
-      },
     },
   };
 }

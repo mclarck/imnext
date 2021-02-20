@@ -10,6 +10,7 @@ import {
 } from "../../../../comp/form/fields";
 import { MainLayout } from "../../../../comp/layout";
 import { t } from "../../../../locale";
+import { getCommonProps } from "../../../../services/common";
 import style from "./style.module.scss";
 import useProfile from "./useProfile";
 
@@ -113,18 +114,11 @@ export async function getServerSideProps(context) {
     res.statusCode = 302;
     res.setHeader("Location", `/${params?.company}/client/login`);
   }
+  const props = { ...getCommonProps(context) };
   return {
-    props: {
-      company: params.company,
-      session: session,
-      rest: {
-        uri: process.env.API_REST_URL,
-        headers: { "IM-COMPANY": params?.company },
-      },
-      graphql: {
-        uri: process.env.API_GRAPHQL_URL,
-        headers: { "IM-COMPANY": params?.company },
-      },
+    props: { 
+      ...props,
+      session: session, 
     },
   };
 }
