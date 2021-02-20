@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import useCartModel from "../../../model/cart";
-import { GET_ALL_SPECIES, GET_STOCKS } from "../../../model/stock/queries";
+import useCartModel from "../model/cart";
+import { GET_ALL_SPECIES, GET_STOCKS } from "../model/stock/queries";
 
 export default function useStocks() {
     const { query: { company, category } } = useRouter();

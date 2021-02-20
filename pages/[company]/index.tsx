@@ -9,7 +9,7 @@ import { Search } from "../../comp/search";
 import { TagSlider } from "../../comp/tagslider";
 import { t } from "../../locale";
 import { getCommonProps } from "../../services/common";
-import useStocks from "./stocks/useStocks";
+import useStocks from "../../controllers/useStocks";
 import style from "./style.module.scss";
 
 export default function StockOverview() {

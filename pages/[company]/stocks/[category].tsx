@@ -10,7 +10,7 @@ import { GET_ALL_SPECIES } from "../../../model/stock/queries";
 import { getCommonProps } from "../../../services/common";
 import { initializeApollo } from "../../../services/graphql/apolloClient";
 import style from "../style.module.scss";
-import useStocks from "./useStocks";
+import useStocks from "../../../controllers/useStocks";
 
 export default function StockCategory() {
   const {
