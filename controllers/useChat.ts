@@ -1,7 +1,7 @@
 
 import { useContext, useEffect, useState } from "react";
-import { ChatIO } from "../../../../services/io/IOProvider";
-import Storager from "../../../../services/storage";
+import { ChatIO } from "../services/io/IOProvider";
+import Storager from "../services/storage";
 
 export default function useChat({ company, session, user }) {
 

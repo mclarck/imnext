@@ -9,7 +9,7 @@ import { Order } from "../../../comp/order";
 import { t } from "../../../locale";
 import { getCommonProps } from "../../../services/common";
 import style from "./style.module.scss";
-import useCart from "./useCart";
+import useCart from "../../../controllers/useCart";
 
 function AfterOrderMessage({
   isOrderSent,

@@ -5,7 +5,7 @@ import { MdLocationOn, MdMail, MdPerson, MdPhone } from "react-icons/md";
 import Link from "next/link";
 import ReCAPTCHA from "react-google-recaptcha";
 import { BsShieldLock } from "react-icons/bs";
-import useClient from "../useClient";
+import useClient from "../../../../controllers/useClient";
 import Check from "../../../../comp/form/check";
 import Field from "../../../../comp/form/field";
 import Loader from "../../../../comp/loader";

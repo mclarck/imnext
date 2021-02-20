@@ -12,7 +12,7 @@ import { OrderState } from "../../../../comp/orderstate";
 import { locale, t } from "../../../../locale";
 import { getCommonProps } from "../../../../services/common";
 import style from "./style.module.scss";
-import useOrders from "./useOrders";
+import useOrders from "../../../../controllers/useOrders";
 
 export default function Orders({ company, session }) {
   const { orderState, cancelOrder, client, carts, loading } = useOrders({

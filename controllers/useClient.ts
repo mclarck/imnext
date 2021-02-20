@@ -1,9 +1,9 @@
 import { useRouter } from "next/router"
 import { useContext, useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
-import { isMail } from "../../../lib/ultils"
-import { t } from "../../../locale"
-import { RestCtx } from "../../../services/rest"
+import { isMail } from "../lib/ultils"
+import { t } from "../locale"
+import { RestCtx } from "../services/rest"
 import { signIn, useSession } from "next-auth/client";
 
 export default function useClient() {

@@ -1,20 +1,20 @@
 import { useQuery } from "@apollo/client"
 import { useForm } from "react-hook-form"
-import { GET_CLIENT } from "../../../../model/client/queries"
+import { GET_CLIENT } from "../model/client/queries"
 import { useContext, useState } from "react"
 import { t } from "i18n-js"
 import { useRouter } from "next/router"
-import { RestCtx } from "../../../../services/rest"
+import { RestCtx } from "../services/rest"
 import _ from "lodash"
 
 export default function useProfile({ session, company, user }) {
     const { register, handleSubmit } = useForm()
-    const { data, loading, error } = useQuery(GET_CLIENT, { variables: { id: user.id } })
+    const { data, loading, error } = useQuery(GET_CLIENT, { variables: { id: user?.id } })
     const [location, setLocation] = useState<any>()
     const [formError, setFormError] = useState<any>({})
     const rest = useContext(RestCtx)
     const router = useRouter()
-    console.log(session, "useProfile")
+    // console.log(session, "useProfile")
 
     function handleError(error) {
         if (error) {
@@ -25,7 +25,7 @@ export default function useProfile({ session, company, user }) {
     async function checkLocation(arg: any) {
         return new Promise(async (resolve, reject) => {
             if (arg.street && arg.number) {
-                const provider: any = (await import('../../../../comp/map/provider')).default
+                const provider: any = (await import('../comp/map/provider')).default
                 const OpenStreetMapProvider = provider()
                 const query = `${arg.street} ${arg.number}, ${arg.city || "CABA, Argentina"}`
                 const results = await OpenStreetMapProvider.search({ query })

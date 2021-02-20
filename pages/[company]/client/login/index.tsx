@@ -1,5 +1,5 @@
 import Head from "next/head";
-import useClient from "../useClient";
+import useClient from "../../../../controllers/useClient";
 import style from "./style.module.scss";
 import React from "react";
 import Loader from "../../../../comp/loader";
