@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@animxyz/core": "^0.5.0",
     "@apollo/client": "^3.3.10",
     "@types/deepmerge": "^2.2.0",
     "@types/howler": "^2.2.1",

@@ -1,13 +1,10 @@
 import Head from "next/head";
 import style from "./style.module.scss";
-import React from "react";
-import { MdLocationOn, MdMail, MdPerson, MdPhone } from "react-icons/md";
+import React from "react"; 
 import Link from "next/link";
-import ReCAPTCHA from "react-google-recaptcha";
-import { BsShieldLock } from "react-icons/bs";
+import ReCAPTCHA from "react-google-recaptcha"; 
 import useClient from "../../../../controllers/useClient";
-import Check from "../../../../comp/form/check";
-import Field from "../../../../comp/form/field";
+import Check from "../../../../comp/form/check"; 
 import Loader from "../../../../comp/loader";
 import { csrfToken } from "next-auth/client";
 import {
@@ -28,6 +25,7 @@ export default function Register({ recaptchaKey, csrfToken }) {
     registration,
     register,
     recaptcha,
+    location
   } = useClient();
 
   if (loading) return <Loader />;
@@ -51,7 +49,9 @@ export default function Register({ recaptchaKey, csrfToken }) {
             error={error}
             register={register}
             style={style}
-            defaultValue={{ location: location }}
+            defaultValue={{
+              address: { city: "CABA, Argentina.", location: location },
+            }}
           />
           <div className={style["grid-2"]}>
             <div>

@@ -53,6 +53,11 @@
   dependencies:
     cross-fetch "3.0.6"
 
+"@animxyz/core@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmjs.org/@animxyz/core/-/core-0.5.0.tgz#b7b0da9ab083f67a2927650e37452b0d7d7ef317"
+  integrity sha512-sqVhE7LfCt8o94ToMP+JYXFGiGjvb+dgL8288a9La2EXH3YxZS8pdBeevlp9XX/WLT138YMD4vTXI0bDJjDSKg==
+
 "@apollo/client@^3.3.10":
   version "3.3.11"
   resolved "https://registry.npmjs.org/@apollo/client/-/client-3.3.11.tgz#125051405e83dc899d471d43b79fd6045d92a802"

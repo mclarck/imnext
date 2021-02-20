@@ -24,7 +24,12 @@ export default function useClient() {
     const { confirmLocation, checkLocation } = useLocation()
     const [location, setLocation] = useState<any>()
 
-
+    function handleError(error) {
+        if (error) {
+            setError(error)
+            console.log(error?.message || error, "error")
+        }
+    }
     async function login(data: any) {
         try {
             setLoading(true)
@@ -37,7 +42,7 @@ export default function useClient() {
             else
                 onLoginFailure(response)
         } catch (error) {
-            console.log(error.message)
+            handleError(error)
         } finally {
             setLoading(false)
         }
@@ -55,20 +60,20 @@ export default function useClient() {
 
     async function registration(data: any) {
         try {
-            setLoading(true)
             const location = await checkLocation(data?.address)
             setLocation(current => current = location)
-            // const recaptchaToken = await recaptcha.current?.executeAsync()
-            // data.recaptcha = recaptchaToken
+            const recaptchaToken = await recaptcha.current?.executeAsync()
+            data.recaptcha = recaptchaToken
             await confirmLocation();
             data.address.location = location
-            const response: any = await rest.mutate("POST", "/api/clients", prepare(data))
+            setLoading(true)
+            const response: any = await rest.mutate("POST", "/api/clients", data)
             if (response.ok)
                 onRegistrationSuccess(response)
             else
                 onRegistrationFailure(response)
         } catch (error) {
-            console.log(error.message)
+            handleError(error)
         } finally {
             setLoading(false)
         }
@@ -76,7 +81,7 @@ export default function useClient() {
 
     function onRegistrationSuccess(res: any) {
         console.log(res.status, "onRegistrationSuccess")
-        replace(`/${company}`)
+        replace(`/${company}/client/login`)
     }
 
 

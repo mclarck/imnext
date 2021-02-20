@@ -8,13 +8,26 @@ export default function useChat({ company, session, user }) {
     const chat = useContext(ChatIO)
     const [messages, setMessages] = useState([])
 
+    function loadMsg(msges: any[]) {
+        if (msges) {
+            const mymsges = msges?.filter(msg => {
+                if ((msg?.sender?.phone === user?.phone && msg?.dest?.phone === company) || 
+                (msg?.sender?.phone === company && msg?.dest?.phone === user?.phone)) {
+                    return true
+                }
+                return false
+            }) 
+            setMessages(current => current = mymsges)
+        }
+    }
+
     async function persistMsg(msg: any) {
         try {
             if (msg) {
                 const storage = new Storager(company)
                 if (!storage.hasVal("chat")) storage.setVal("chat", [])
                 storage.addVal("chat", mapMsg(msg))
-                setMessages(current => current = storage.getVal("chat"))
+                loadMsg(storage.getVal("chat"))
             }
         } catch (error) {
             handleError(error)
@@ -62,8 +75,8 @@ export default function useChat({ company, session, user }) {
     }
     useEffect(() => {
         const storage = new Storager(company)
-        if (!storage.hasVal("chat")) storage.setVal("chat", []) 
-        setMessages(current => current = storage.getVal("chat"))
+        if (!storage.hasVal("chat")) storage.setVal("chat", [])
+        loadMsg(storage.getVal("chat"))
         if (chat) {
             chat.on("message", onReceiveMsg)
         }

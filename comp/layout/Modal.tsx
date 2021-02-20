@@ -1,15 +1,15 @@
 import React, { Children } from "react";
 import style from "./style.module.scss";
-import { MdClose } from "react-icons/md";
+import { MdClose } from "react-icons/md"; 
 
 export default function Modal({
   children,
   onClose,
-  footer, 
+  footer,
 }: {
   children: any;
   onClose?: Function;
-  footer?: any; 
+  footer?: any;
 }) {
   function handleClick() {
     onClose && onClose();
