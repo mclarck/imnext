@@ -7,13 +7,14 @@ import { useRouter } from "next/router"
 import { RestCtx } from "../../../../services/rest"
 import _ from "lodash"
 
-export default function useProfile(session) {
+export default function useProfile({ session, company, user }) {
     const { register, handleSubmit } = useForm()
-    const { data, loading, error } = useQuery(GET_CLIENT, { variables: { id: `/api/clients/${session.user.id}` } })
+    const { data, loading, error } = useQuery(GET_CLIENT, { variables: { id: user.id } })
     const [location, setLocation] = useState<any>()
     const [formError, setFormError] = useState<any>({})
     const rest = useContext(RestCtx)
     const router = useRouter()
+    console.log(session, "useProfile")
 
     function handleError(error) {
         if (error) {
@@ -60,5 +61,5 @@ export default function useProfile(session) {
         }
     }
     if (error) handleError(error)
-    return { loading, location, error: formError, register, user: data?.client, handleSubmit, submit }
+    return { location, loading, error: formError, register, user: data?.client, handleSubmit, submit }
 }

@@ -18,6 +18,7 @@ export default function Orders({ company, session }) {
   const { orderState, cancelOrder, client, carts, loading } = useOrders({
     session,
     company,
+    user: session?.user
   });
   if (loading) return <Loader />;
   return (

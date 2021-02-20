@@ -9,6 +9,7 @@ import {
   PersonalField,
 } from "../../../../comp/form/fields";
 import { MainLayout } from "../../../../comp/layout";
+import Loader from "../../../../comp/loader";
 import { t } from "../../../../locale";
 import { getCommonProps } from "../../../../services/common";
 import style from "./style.module.scss";
@@ -18,12 +19,13 @@ export default function Profile({ company, session }) {
   const {
     user,
     location,
-    error,
     loading,
+    error,
     register,
     handleSubmit,
     submit,
-  } = useProfile(session);
+  } = useProfile({ session, company, user: session?.user });
+  if (loading) return <Loader />;
   return (
     <MainLayout>
       <Head>
@@ -116,9 +118,9 @@ export async function getServerSideProps(context) {
   }
   const props = { ...getCommonProps(context) };
   return {
-    props: { 
+    props: {
       ...props,
-      session: session, 
+      session: session,
     },
   };
 }

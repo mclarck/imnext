@@ -63,7 +63,6 @@ export default function StockCategory() {
   );
 }
 
-
 export async function getServerSideProps(context) {
   const { res, params } = context;
   if (params.company !== "Kioskito") {
