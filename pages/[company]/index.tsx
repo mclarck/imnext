@@ -29,9 +29,7 @@ export default function StockOverview() {
   return (
     <MainLayout>
       <Head>
-        <title>
-          {company} - {t("Stock Overview")}
-        </title>
+        <title>{company}</title>
       </Head>
       <div className={style.overView}>
         <div className={style.search}>

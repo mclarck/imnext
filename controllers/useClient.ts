@@ -58,8 +58,8 @@ export default function useClient() {
             setLoading(true)
             const location = await checkLocation(data?.address)
             setLocation(current => current = location)
-            const recaptchaToken = await recaptcha.current?.executeAsync()
-            data.recaptcha = recaptchaToken
+            // const recaptchaToken = await recaptcha.current?.executeAsync()
+            // data.recaptcha = recaptchaToken
             await confirmLocation();
             data.address.location = location
             const response: any = await rest.mutate("POST", "/api/clients", prepare(data))

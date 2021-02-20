@@ -34,7 +34,7 @@ export default function Register({ recaptchaKey, csrfToken }) {
   return (
     <div className={style.Register}>
       <Head>
-        <title>{t("Client Registration")}</title>
+        <title>{t("Client - Registration")}</title>
       </Head>
       <div className={style.register}>
         <form className={style.form} onSubmit={handleSubmit(registration)}>

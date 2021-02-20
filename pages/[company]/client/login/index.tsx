@@ -26,7 +26,7 @@ export default function Login({ session, csrfToken, recaptchaKey, providers }) {
   return (
     <div className={style.Login}>
       <Head>
-        <title>Client - Login</title>
+        <title>{t("Client - Login")}</title>
       </Head>
       <div className={style.login}>
         <form className={style.form} onSubmit={handleSubmit(login)}>

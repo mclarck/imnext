@@ -79,7 +79,7 @@ export default function Cart({ session, company }) {
     <MainLayout>
       <Head>
         <title>
-          {company} | Cart - {session?.user?.name}
+          {company} | {t("Cart")} - {session?.user?.name}
         </title>
       </Head>
       <div className={style.Cart}>

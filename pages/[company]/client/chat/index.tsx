@@ -15,7 +15,7 @@ export default function Chat({ company, session }) {
     <MainLayout>
       <Head>
         <title>
-          {company} | Profile - {session?.user?.name}
+          {company} | {t("Profile")} - {session?.user?.name}
         </title>
       </Head>
       <div className={style.Chat}>

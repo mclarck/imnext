@@ -34,7 +34,7 @@ const usePopMenu = () => {
         e.preventDefault()
         if(await confirm(t("Disconnect ?"))){
             console.log('will signout')
-            signOut({ callbackUrl: `/kioskito` })
+            signOut({ callbackUrl: `/${company}` })
         }
     }
 
