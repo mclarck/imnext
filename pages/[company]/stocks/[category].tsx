@@ -6,7 +6,9 @@ import Loader from "../../../comp/loader";
 import { Search } from "../../../comp/search";
 import { TagSlider } from "../../../comp/tagslider";
 import { t } from "../../../locale";
+import { GET_ALL_SPECIES } from "../../../model/stock/queries";
 import { getCommonProps } from "../../../services/common";
+import { initializeApollo } from "../../../services/graphql/apolloClient";
 import style from "../style.module.scss";
 import useStocks from "./useStocks";
 
@@ -63,7 +65,26 @@ export default function StockCategory() {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths() {
+  let paths = []; //[{ params:{ company, category } }]
+  let companies = ["Kioskito"];
+  let categories = [];
+  const apollo = initializeApollo();
+  const graph = await apollo.query({ query: GET_ALL_SPECIES });
+  function mapCategory(stocks) { 
+    let tags = stocks?.map((o) => o.node?.product?.specie);
+    return tags?.filter((a, b) => tags.indexOf(a) === b);
+  }
+  categories = mapCategory(graph?.data?.stocks?.edges);
+  companies?.map((company) => {
+    categories?.map((category) => {
+      paths?.push({ params: { company, category } });
+    });
+  });
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps(context) {
   const { res, params } = context;
   if (params.company !== "Kioskito") {
   }

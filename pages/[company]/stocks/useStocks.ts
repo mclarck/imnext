@@ -27,6 +27,14 @@ export default function useStocks() {
         return true
     })
 
+    function match(tag: string, filterkey: string) {
+        if (filterkey) {
+            const regex = new RegExp(`^${filterkey}`, "i")
+            return regex.test(tag)
+        }
+        return false
+    }
+
     const onSearch = (search: string | Array<any>) => {
         setKey(null)
         setFilterKey(null)
@@ -48,9 +56,9 @@ export default function useStocks() {
     handleError(errorStocks)
 
     function getTags() {
-        let tags = _.map(species?.stocks?.edges, (o) => o.node?.product?.specie.toString().toLowerCase())
+        let tags = _.map(species?.stocks?.edges, (o) => o.node?.product?.specie)
         return tags.filter((a, b) => tags.indexOf(a) === b)
     }
 
-    return { addToCart, onSearch, filter, filterKey, loading: loadingSpecies || loadingStocks, company, category, getTags, stocks: stocks?.stocks?.edges }
+    return { addToCart, onSearch, match, filter, filterKey, loading: loadingSpecies || loadingStocks, company, category, getTags, stocks: stocks?.stocks?.edges }
 }

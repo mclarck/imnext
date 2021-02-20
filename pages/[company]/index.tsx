@@ -15,6 +15,7 @@ import style from "./style.module.scss";
 export default function StockOverview() {
   const {
     company,
+    match,
     onSearch,
     filter,
     filterKey,
@@ -41,7 +42,7 @@ export default function StockOverview() {
         </div>
         <section className={style.articles}>
           {tags?.map((tag, index) => {
-            if (filterKey && filterKey !== tag) return null;
+            if (filterKey && !match(tag, filterKey)) return null;
             return (
               <div key={index} className={style.article}>
                 <TagLayout title={tag}>
@@ -66,10 +67,16 @@ export default function StockOverview() {
   );
 }
 
-export async function getServerSideProps(context) {
-  const { res, params } = context;
-  if (params.company !== "Kioskito") {
-  }
+export async function getStaticPaths() {
+  let paths = []; //[{ params:{ company, category } }]
+  let companies = ["Kioskito"];
+  companies?.map((company) => {
+    paths?.push({ params: { company } });
+  });
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps(context) {
   const props = { ...getCommonProps(context) };
   return {
     props: {
