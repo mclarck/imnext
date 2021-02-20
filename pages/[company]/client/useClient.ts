@@ -24,14 +24,30 @@ export default function useClient() {
 
     async function login(data: any) {
         try {
+            setLoading(true)
             // const recaptchaToken = await recaptcha.current?.executeAsync()
             // data.recaptcha = recaptchaToken
-            const token = { ...prepare(data), company, callbackUrl: `/${company}`, callbackFailure: `/${company}/client/login` }
-            signIn("client-login", token)
+            const token = { ...prepare(data), company: company, redirect: false }
+            const response: any = await signIn("client-login", token)
+            if (response.ok)
+                onLoginSucess(response)
+            else
+                onLoginFailure(response)
         } catch (error) {
-            alert(JSON.stringify(error))
-            console.log(error)
+            console.log(error.message)
+        } finally {
+            setLoading(false)
         }
+    }
+
+    function onLoginSucess(token: any) {
+        console.log(token, "onLoginSuccess")
+        replace(`/${company}`)
+    }
+
+    function onLoginFailure(token: any) {
+        console.log("fail to login", "onLoginFailure")
+        setError({ login: t("Fail to login") })
     }
 
     async function registration(data: any) {

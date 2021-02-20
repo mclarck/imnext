@@ -21,8 +21,7 @@ export default function useCart() {
     const { subTotal, shipment, amount } = useCalculator(cart?.items)
     const [session, loading] = useSession()
     const rest = useContext(RestCtx)
-    const client: any = session.user
-
+    const client: any = session?.user
 
     const bills = [
         { name: t("SubTotal"), value: subTotal() },

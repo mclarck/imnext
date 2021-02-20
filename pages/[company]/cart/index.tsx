@@ -132,6 +132,7 @@ export default function Cart({ session, company }) {
 export async function getServerSideProps(context) {
   const { res, params } = context;
   const session = await getSession(context);
+  console.log(session)
   if (!session) {
     res.statusCode = 302;
     res.setHeader("Location", `/${params?.company}/client/login`);

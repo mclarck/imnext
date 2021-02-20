@@ -1,4 +1,4 @@
-import { signout, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useRef } from "react";
@@ -11,10 +11,12 @@ const usePopMenu = () => {
     const menu = useRef<any>()
     const show = () => showMenu((visible: boolean) => visible = true)
     const hide = () => showMenu((visible: boolean) => visible = false)
+    
     const handleClick = useCallback((e: any) => {
         if (visible) {
             if (e.target.tagName === "A") {
-                setTimeout(() => hide(), 500)
+                // setTimeout(() => hide(), 300) // delay to fix bug full react application
+                hide()
             } else {
                 hide()
             }
@@ -32,7 +34,7 @@ const usePopMenu = () => {
         e.preventDefault()
         if(await confirm(t("Disconnect ?"))){
             console.log('will signout')
-            signout({ callbackUrl: `/kioskito` })
+            signOut({ callbackUrl: `/kioskito` })
         }
     }
 

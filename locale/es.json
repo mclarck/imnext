@@ -62,5 +62,6 @@
   "Order will be canceled, continue?": "Se cancelará el pedido. ¿Continuar?",
   "Is it the good address?": "¿Es la buena dirección?",
   "Please, confirm location": "Confirmar ubicación",
-  "Invalid location": "Dirección inválida"
+  "Invalid location": "Dirección inválida",
+  "Fail to login": "Error al iniciar sesión"
 }

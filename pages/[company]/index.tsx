@@ -1,3 +1,4 @@
+import { reject } from "lodash";
 import Head from "next/head";
 import React from "react";
 import { Advice } from "../../comp/advice";
@@ -62,4 +63,17 @@ export default function StockOverview() {
       <Advice />
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { res, params } = context;
+  if (params.company !== "Kioskito") {
+    res.statusCode = 302; 
+    res.setHeader("Location", `/errors/404`);
+  }
+  return {
+    props: {
+      company: params.company,
+    },
+  };
 }

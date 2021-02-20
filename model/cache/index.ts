@@ -4,7 +4,7 @@ export const _cart: any = makeVar<any>([])
 export const _auth: any = makeVar<any>({})
 
 const cache = new InMemoryCache({
-    addTypename: false,
+    addTypename: true,
     typePolicies: {
         Query: {
             fields: {

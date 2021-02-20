@@ -20,6 +20,7 @@
   .error,
   .tip {
     font-size: 0.7rem;
+    padding: 5px 2px;
 
     .icon {
       width: 20px;
@@ -27,6 +28,10 @@
       @include flex();
       justify-content: center;
     }
+  }
+
+  .error {
+    color: red;
   }
 
   .label {
