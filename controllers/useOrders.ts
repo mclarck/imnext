@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client"
 import { useContext, useState } from "react"
-import { t } from "../../../../locale"
-import { GET_FULL_CLIENT } from "../../../../model/client/queries"
-import { AnalyticIO } from "../../../../services/io/IOProvider"
-import { RestCtx } from "../../../../services/rest"
+import { t } from "../locale"
+import { GET_FULL_CLIENT } from "../model/client/queries"
+import { AnalyticIO } from "../services/io/IOProvider"
+import { RestCtx } from "../services/rest"
 
 export default function useOrders({ session, company, user }) {
     const { data, loading: loadingClient, error: errorClient, refetch } = useQuery(GET_FULL_CLIENT, { fetchPolicy: "cache-and-network", variables: { id: user?.id } })

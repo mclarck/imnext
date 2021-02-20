@@ -7,7 +7,7 @@ import { MainLayout } from "../../../../comp/layout";
 import { t } from "../../../../locale";
 import { getCommonProps } from "../../../../services/common";
 import style from "./style.module.scss";
-import useChat from "./useChat";
+import useChat from "../../../../controllers/useChat";
 
 export default function Chat({ company, session }) {
   const { send, clear, messages } = useChat({ company, session, user: session?.user });

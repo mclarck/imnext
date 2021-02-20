@@ -13,7 +13,7 @@ import Loader from "../../../../comp/loader";
 import { t } from "../../../../locale";
 import { getCommonProps } from "../../../../services/common";
 import style from "./style.module.scss";
-import useProfile from "./useProfile";
+import useProfile from "../../../../controllers/useProfile";
 
 export default function Profile({ company, session }) {
   const {

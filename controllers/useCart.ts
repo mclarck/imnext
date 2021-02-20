@@ -3,10 +3,10 @@ import _ from "lodash";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import { t } from "../../../locale";
-import useCartModel, { GET_CART_ITEMS } from "../../../model/cart";
-import { RestCtx } from "../../../services/rest";
-import { useCalculator } from "../../../services/utils";
+import { t } from "../locale";
+import useCartModel, { GET_CART_ITEMS } from "../model/cart";
+import { RestCtx } from "../services/rest";
+import { useCalculator } from "../services/utils";
 
 export default function useCart() {
     const {
