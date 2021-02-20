@@ -5,6 +5,7 @@ import { isMail } from "../lib/ultils"
 import { t } from "../locale"
 import { RestCtx } from "../services/rest"
 import { signIn, useSession } from "next-auth/client";
+import useLocation from "./useLocation"
 
 export default function useClient() {
     const [session] = useSession()
@@ -20,13 +21,15 @@ export default function useClient() {
     const [offerAccepted, handleOffer] = useState<boolean>(false)
     const recaptcha = useRef(null);
     const { query: { company }, replace } = useRouter();
+    const { confirmLocation, checkLocation } = useLocation()
+    const [location, setLocation] = useState<any>()
 
 
     async function login(data: any) {
         try {
             setLoading(true)
-            // const recaptchaToken = await recaptcha.current?.executeAsync()
-            // data.recaptcha = recaptchaToken
+            const recaptchaToken = await recaptcha.current?.executeAsync()
+            data.recaptcha = recaptchaToken
             const token = { ...prepare(data), company: company, redirect: false }
             const response: any = await signIn("client-login", token)
             if (response.ok)
@@ -41,7 +44,7 @@ export default function useClient() {
     }
 
     function onLoginSucess(token: any) {
-        console.log(token, "onLoginSuccess")
+        console.log(token?.username, "onLoginSuccess")
         replace(`/${company}`)
     }
 
@@ -52,29 +55,34 @@ export default function useClient() {
 
     async function registration(data: any) {
         try {
-            // const recaptchaToken = await recaptcha.current?.executeAsync()
-            // data.recaptcha = recaptchaToken
-            console.log(data)
+            setLoading(true)
+            const location = await checkLocation(data?.address)
+            setLocation(current => current = location)
+            const recaptchaToken = await recaptcha.current?.executeAsync()
+            data.recaptcha = recaptchaToken
+            await confirmLocation();
+            data.address.location = location
+            const response: any = await rest.mutate("POST", "/api/clients", prepare(data))
+            if (response.ok)
+                onRegistrationSuccess(response)
+            else
+                onRegistrationFailure(response)
         } catch (error) {
             console.log(error.message)
-        }
-    }
-
-    async function checkClient(captchaToken) {
-        try {
-            const res = await rest?.request("POST", "/security/client", prepare(data))
-            if (!res.ok) return setError({ login: t("Client not found!") })
-            const json = await res.json()
-            json.id = "/api/clients/" + json.id
-            delete json.operations
-            // store.setVal("auth", json)
-            // if (arg.onLogged) arg.onLogged()
-        } catch (error) {
-            console.log(error.message)
-            return setError({ login: t("An error has occured!") })
         } finally {
             setLoading(false)
         }
+    }
+
+    function onRegistrationSuccess(res: any) {
+        console.log(res.status, "onRegistrationSuccess")
+        replace(`/${company}`)
+    }
+
+
+    function onRegistrationFailure(res: any) {
+        console.log(res.status, "onRegistrationFailure")
+        setError({ username: t("Fail to register, please try again later") })
     }
 
     const prepare = (data: any) => {
@@ -92,5 +100,5 @@ export default function useClient() {
         setConfirm(false)
     }
 
-    return { t, replace, session, login, registration, company, recaptcha, resetAddress, error, loading, register, handleSubmit, handleTos, handleOffer }
+    return { t, location, replace, session, login, registration, company, recaptcha, resetAddress, error, loading, register, handleSubmit, handleTos, handleOffer }
 }

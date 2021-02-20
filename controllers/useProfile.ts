@@ -6,6 +6,7 @@ import { t } from "i18n-js"
 import { useRouter } from "next/router"
 import { RestCtx } from "../services/rest"
 import _ from "lodash"
+import useLocation from "./useLocation"
 
 export default function useProfile({ session, company, user }) {
     const { register, handleSubmit } = useForm()
@@ -14,7 +15,7 @@ export default function useProfile({ session, company, user }) {
     const [formError, setFormError] = useState<any>({})
     const rest = useContext(RestCtx)
     const router = useRouter()
-    // console.log(session, "useProfile")
+    const { confirmLocation, checkLocation } = useLocation() 
 
     function handleError(error) {
         if (error) {
@@ -22,39 +23,15 @@ export default function useProfile({ session, company, user }) {
             console.log(error?.message || error, "error")
         }
     }
-    async function checkLocation(arg: any) {
-        return new Promise(async (resolve, reject) => {
-            if (arg.street && arg.number) {
-                const provider: any = (await import('../comp/map/provider')).default
-                const OpenStreetMapProvider = provider()
-                const query = `${arg.street} ${arg.number}, ${arg.city || "CABA, Argentina"}`
-                const results = await OpenStreetMapProvider.search({ query })
-                if (!_.isEmpty(results)) {
-                    const location = results[0]
-                    setLocation(location)
-                    resolve(location)
-                }
-            }
-            reject({ address: { street: t("Invalid location") }, message: `${JSON.stringify(arg)}: invalid location` })
-        })
-    }
-    async function confirmLocation() {
-        return new Promise((resolve, reject) => {
-            const isOk = window.confirm(t("Is it the good address?"))
-            if (isOk) {
-                resolve(true)
-            }
-            reject({ address: { street: t("Please, confirm location") }, message: "location unconfirmed" })
-        })
-    }
+
     async function submit(data: any) {
         try {
             const location = await checkLocation(data?.address)
+            setLocation(current => current = location)
             await confirmLocation();
             data.address.location = location
             const response = await rest.mutate("PUT", data.id, data)
-            const json = await response.json()
-            console.log(json, "client data")
+            const json = await response.json() 
             router.reload()
         } catch (error) {
             handleError(error)

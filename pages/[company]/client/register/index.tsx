@@ -23,21 +23,19 @@ export default function Register({ recaptchaKey, csrfToken }) {
     t,
     company,
     error,
-    resetAddress,
     loading,
     handleSubmit,
     registration,
     register,
     recaptcha,
-    handleTos,
-    handleOffer,
   } = useClient();
 
+  if (loading) return <Loader />;
   return (
     <div className={style.Register}>
       <Head>
-        <title>Client - Registration</title>
-      </Head> 
+        <title>{t("Client Registration")}</title>
+      </Head>
       <div className={style.register}>
         <form className={style.form} onSubmit={handleSubmit(registration)}>
           <input
@@ -51,10 +49,9 @@ export default function Register({ recaptchaKey, csrfToken }) {
           <PinField error={error} register={register} style={style} />
           <LocationField
             error={error}
-            onBlur={resetAddress}
             register={register}
             style={style}
-            defaultValue={{ address: { city: "Buenos Aires, Arg." } }}
+            defaultValue={{ location: location }}
           />
           <div className={style["grid-2"]}>
             <div>
@@ -105,7 +102,7 @@ export async function getServerSideProps(context) {
     props: {
       ...props,
       csrfToken: await csrfToken(context),
-      recaptchaKey: process.env.RECAPTCHA_PUBLIC_KEY
+      recaptchaKey: process.env.RECAPTCHA_PUBLIC_KEY,
     },
   };
 }
