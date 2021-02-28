@@ -10,7 +10,11 @@ import style from "./style.module.scss";
 import useChat from "../../../../controllers/useChat";
 
 export default function Chat({ company, session }) {
-  const { send, clear, messages } = useChat({ company, session, user: session?.user });
+  const { filterConversation, send, clear, messages } = useChat({
+    company,
+    session,
+    user: session?.user,
+  });
   return (
     <MainLayout>
       <Head>
@@ -41,7 +45,12 @@ export default function Chat({ company, session }) {
           </nav>
         </div>
         <div className={style.body}>
-          <ChatBox title={`${company}@${t("support")}`} messages={messages} onSend={send} onClose={clear} />
+          <ChatBox
+            title={`${company}@${t("support")}`}
+            messages={filterConversation(messages)}
+            onSend={send}
+            onClose={clear}
+          />
         </div>
       </div>
     </MainLayout>
