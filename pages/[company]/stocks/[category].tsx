@@ -67,7 +67,7 @@ export default function StockCategory() {
 
 export async function getStaticPaths() {
   let paths = []; //[{ params:{ company, category } }]
-  let companies = ["Kioskito"];
+  let companies = ["kioskito"];
   let categories = [];
   const apollo = initializeApollo();
   const graph = await apollo.query({ query: GET_ALL_SPECIES });
@@ -86,8 +86,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { res, params } = context;
-  if (params.company !== "Kioskito") {
-  }
   const props = { ...getCommonProps(context) };
   return {
     props: {

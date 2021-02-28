@@ -67,7 +67,7 @@ export default function StockOverview() {
 
 export async function getStaticPaths() {
   let paths = []; //[{ params:{ company, category } }]
-  let companies = ["Kioskito"];
+  let companies = ["kioskito"];
   companies?.map((company) => {
     paths?.push({ params: { company } });
   });
