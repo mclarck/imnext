@@ -11,8 +11,11 @@ const useIO = ({ io, session }) => {
   } = useRouter();
 
   const onError = (e: any) => console.log(e.message);
-  const onJoin = (payload: any) => {};
+  const onJoin = (payload: any) => {
+    console.log(payload, "joined chat");
+  };
   const onMsg = (payload: any) => {
+    console.log(payload, "new message");
     const store = new Storager(company as string);
     if (!store.hasVal("messages")) store.setVal("messages", []);
     const msges: any[] = store.getVal("messages");
@@ -23,15 +26,15 @@ const useIO = ({ io, session }) => {
     if (socket) {
       // we need to join a room
       if (session) {
-        socket.emit("join", { ...session.user, iri: session?.user?.phone });
-        socket.on("join", onJoin);
+        socket.emit("join", { ...session.user, iri: session?.user?.id });
+        socket.on("joined", onJoin);
         socket.on("message", onMsg);
       }
     }
   };
   const cleanChat = (socket: SocketIOClient.Socket) => {
     if (socket) {
-      socket.off("join", onJoin);
+      socket.off("joined", onJoin);
       socket.off("message", onMsg);
       socket.disconnect();
     }

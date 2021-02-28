@@ -25,10 +25,12 @@ export default function useChat({ company, session, user }) {
       isSender: msg?.sender?.iri === user.id,
     }));
   }
-  function onReceiveMsg() {
+  function onReceiveMsg(payload?: any) {
+    console.log(payload, "message recevied");
     const store = new Storager(company);
     let msges: any[] = store.getVal("messages");
     msges = mapMsg(msges);
+    console.log(msges, "all messages");
     setMessages(msges);
   }
   function buildPayload(msg: string) {
@@ -41,7 +43,10 @@ export default function useChat({ company, session, user }) {
   async function send(msg: string) {
     try {
       const payload = buildPayload(msg);
-      if(chat) chat.emit("message", payload);
+      if (chat) {
+        console.log(payload, "message");
+        chat.emit("message", payload);
+      }
     } catch (error) {
       handleError(error);
     }
@@ -56,11 +61,11 @@ export default function useChat({ company, session, user }) {
   }
   useEffect(() => {
     if (chat) {
-      chat.on("message", onReceiveMsg);
+      chat.on("message", (p: any) => onReceiveMsg(p));
     }
     return () => {
       cleanChatIO(chat);
     };
-  }, []);
+  }, [chat]);
   return { filterConversation, send, messages, clear };
 }
