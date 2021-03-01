@@ -23,6 +23,7 @@ const useIO = ({ io, session }) => {
     store.setVal("messages", msges);
   };
   const handleChat = (socket: SocketIOClient.Socket) => {
+    console.log(session, "session handle chat")
     if (socket) {
       // we need to join a room
       if (session) {

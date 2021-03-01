@@ -15,8 +15,8 @@ export default function useChat({ company, session, user }) {
     });
   }
   function clear() {
-    const storage = new Storager(company);
-    storage.setVal("messages", []);
+    const store = new Storager(company); 
+    store.setVal("messages", []);
     onReceiveMsg();
   }
   function mapMsg(msges: any[]) {
@@ -26,7 +26,6 @@ export default function useChat({ company, session, user }) {
     }));
   }
   function onReceiveMsg(payload?: any) {
-    console.log(payload, "message recevied");
     const store = new Storager(company);
     let msges: any[] = store.getVal("messages");
     msges = mapMsg(msges);
@@ -44,7 +43,7 @@ export default function useChat({ company, session, user }) {
     try {
       const payload = buildPayload(msg);
       if (chat) {
-        console.log(payload, "message");
+        console.log(payload, "message payload");
         chat.emit("message", payload);
       }
     } catch (error) {
@@ -63,6 +62,7 @@ export default function useChat({ company, session, user }) {
     if (chat) {
       chat.on("message", (p: any) => onReceiveMsg(p));
     }
+    onReceiveMsg();
     return () => {
       cleanChatIO(chat);
     };
