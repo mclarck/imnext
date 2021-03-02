@@ -57,7 +57,9 @@ export default function useStocks() {
 
     function getTags() {
         let tags = _.map(species?.stocks?.edges, (o) => o.node?.product?.specie)
-        return tags.filter((a, b) => tags.indexOf(a) === b)
+        tags = tags.filter((a, b) => tags.indexOf(a) === b)
+        console.log(tags)
+        return tags
     }
 
     return { addToCart, onSearch, match, filter, filterKey, loading: loadingSpecies || loadingStocks, company, category, getTags, stocks: stocks?.stocks?.edges }

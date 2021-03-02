@@ -36,25 +36,28 @@ export default function StockCategory() {
         <div className={style.search}>
           <Search size="lg" onSearch={onSearch} />
         </div>
-        <div className={style.slider}>
+        {/* <div className={style.slider}>
           <TagSlider tags={tags} />
-        </div>
+        </div> */}
         <section className={style.articles}>
           {tags?.map(
             (tag, index) =>
               tag === category && (
                 <div key={index} className={style.article}>
                   <TagLayout title={tag} wrap={true}>
-                    {filter(stocks)?.map((stock, idx) => (
-                      <Article
-                        key={idx}
-                        onAddToCart={(o) =>
-                          addToCart({ ...o, stock: stock.node })
-                        }
-                        data={stock.node}
-                        AddToCartLabel={t("Add to Cart")}
-                      />
-                    ))}
+                    {filter(stocks)?.map(
+                      (n, idx) =>
+                        n?.node?.product?.specie === tag && (
+                          <Article
+                            key={idx}
+                            onAddToCart={(o) =>
+                              addToCart({ ...o, stock: n.node })
+                            }
+                            data={n.node}
+                            AddToCartLabel={t("Add to Cart")}
+                          />
+                        )
+                    )}
                   </TagLayout>
                 </div>
               )
@@ -71,7 +74,7 @@ export async function getStaticPaths() {
   let categories = [];
   const apollo = initializeApollo();
   const graph = await apollo.query({ query: GET_ALL_SPECIES });
-  function mapCategory(stocks) { 
+  function mapCategory(stocks) {
     let tags = stocks?.map((o) => o.node?.product?.specie);
     return tags?.filter((a, b) => tags.indexOf(a) === b);
   }

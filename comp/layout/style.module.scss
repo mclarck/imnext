@@ -52,13 +52,16 @@
     grid-auto-flow: column;
     grid-gap: 10px;
     overflow: auto;
+    > * {
+      min-width: 150px;
+    }
     &::-webkit-scrollbar {
       width: 0px;
       height: 0px;
     }
     &.wrap {
-      justify-content: center;
       grid-auto-flow: row;
+      justify-content: center;
     }
   }
 }
@@ -67,8 +70,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100vw !important;
+  height: 100vh !important;
   display: flex;
   flex-direction: row;
   align-items: center;

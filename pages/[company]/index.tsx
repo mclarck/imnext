@@ -35,25 +35,28 @@ export default function StockOverview() {
         <div className={style.search}>
           <Search size="lg" onSearch={onSearch} advanced />
         </div>
-        <div className={style.slider}>
+        {/* <div className={style.slider}>
           <TagSlider tags={tags} />
-        </div>
+        </div> */}
         <section className={style.articles}>
           {tags?.map((tag, index) => {
             if (filterKey && !match(tag, filterKey)) return null;
             return (
               <div key={index} className={style.article}>
                 <TagLayout title={tag}>
-                  {filter(stocks)?.map((stock, idx) => (
-                    <Article
-                      key={idx}
-                      onAddToCart={(o) =>
-                        addToCart({ ...o, stock: stock.node })
-                      }
-                      data={stock.node}
-                      AddToCartLabel={t("Add to Cart")}
-                    />
-                  ))}
+                  {filter(stocks)?.map(
+                    (n, idx) =>
+                      n?.node?.product?.specie === tag && (
+                        <Article
+                          key={idx}
+                          onAddToCart={(o) =>
+                            addToCart({ ...o, stock: n.node })
+                          }
+                          data={n.node}
+                          AddToCartLabel={t("Add to Cart")}
+                        />
+                      )
+                  )}
                 </TagLayout>
               </div>
             );

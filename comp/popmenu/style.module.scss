@@ -21,6 +21,9 @@ $dark: #222;
     border: none;
     background: none;
     outline: none;
+    svg {
+      font-size: 23px !important;
+    }
 
     &:active {
       outline: none;
