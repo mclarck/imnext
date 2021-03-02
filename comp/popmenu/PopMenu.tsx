@@ -9,9 +9,9 @@ export default function PopMenu() {
   const { show, logOut, visible, company, session } = usePopMenu();
   return (
     <div className={style.PopMenu}>
-      <button className={style.icon} onClick={show}>
+      <div className={style.icon} onClick={show}>
         <CgMenuRight />
-      </button>
+      </div>
       {visible && (
         <nav className={style.overlay}>
           <ul className={style.items}>
