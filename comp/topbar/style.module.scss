@@ -10,8 +10,8 @@
   box-sizing: border-box;
   @include flex;
   justify-content: space-between;
-  @include white-bg;
-  border-bottom: 1px solid darken($light, 3);
+  @include dark-bg;
+  // border-bottom: 1px solid darken($light, 3);
 
   > ul {
     @include flex;

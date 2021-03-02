@@ -12,3 +12,13 @@
     }
   }
 }
+
+@mixin dark-bg {
+  background: $w-dark;
+  * {
+    color: darken($city-light, 10);
+  }
+  .active {
+    color: lighten($city-light, 30);
+  }
+}
